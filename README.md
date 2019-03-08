@@ -1,7 +1,7 @@
 # study
 This is Repository for summary of study
 
-- [jpa summary](./jpa/README.md)
+- [jpa summary](./study/jpa.md)
 
 
 
