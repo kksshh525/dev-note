@@ -127,5 +127,36 @@ Insert, update, 단건 조회는 SQL이 필요없다. 하지만, 검색 쿼리�
 
 ## 8. 프록시와 연관관계 관리
 
+즉시로딩: 대부분의 JPA구현체는 즉시 로딩을 최적화 하기 위해 가능하면 **조인 쿼리를 사용한다**
+지연로딩: **프록시**를 통해서 연관된 객체 탐색시, 원하는 시점에 데이터베이스를 조회할 수 있다.
+
+### 프록시 기초
+JPA에서 식별자로 엔티티 하나를 조회할 때 `EntityManager.find()`를 사용한다. 이 메서드는 영속성 컨텍스트에 엔티티가 없으면 데이터 베이스를 조회한다.
+```java
+Member member = em.find(Member.class, "member1");
+```
+만약에 엔티티를 실제 사용하는 시점까지 데이터베이스 조회를 미루고 싶으면 `EntityManger.getReference()`를 사용한다. 
+```java
+Member member = em.getReference(Member.class, "member1");
+```
+이 메소드를 호출할 때 JPA는 데이터베이스를 조회하지 않고 실제 엔티티 객체도 생성하지 않는다. 대신에 데이터베이스 접근을 위임한 프록시 객체를 반환한다. 
+
+
+즉시로딩 시, JPA는 외부조인(Left Outer) 조인을 사용한다. 그 이유는 내부조인을 사용하게 되면, 외래키 null값이 존재하는 경우, 우리가 원하는 어떤 데이터도 조회할 수 없기 때문이다. 성능적인 측면에서 내부 조인이 좋기 때문에. 내부조인을 사용할려면, 외래키를 not null 조건으로 특정해야 한다
+```java 
+@Entity
+public class Member {
+  //...
+  @ManyToOne(fetch = FetchType.EAGER)
+  @JoinColumn(name="TEAM_ID", nullable = false)
+  private Team team;
+  //...
+}
+```
+
+### 영속성 전이: CASCADE
+- 특정 엔티티를 영속상태로 만들 때 연관된 엔티티도 함께 영속 상태로 만들고 싶으면 영속성 전이 기능을 사용한다.
+- 영속성 전이는 연관관계를 매핑하는 것과는 아무 관련이 없다. 단지 연관된 엔티티도 같이 영속화하는 편리함을 제공할 뿐 
+
 
 
