@@ -6,6 +6,11 @@
 - [3.영속성 관리]()
 - [4.엔티티 매핑]()
 - [5.연관관계 매핑 기초]()
+- [6. 다양한 연관관계 매핑]()
+- [7. 고급 매핑]()
+- [8. 프록시와 연관관계 관리]()
+- [9. 값 타입]()
+
 
 
 
@@ -157,6 +162,61 @@ public class Member {
 ### 영속성 전이: CASCADE
 - 특정 엔티티를 영속상태로 만들 때 연관된 엔티티도 함께 영속 상태로 만들고 싶으면 영속성 전이 기능을 사용한다.
 - 영속성 전이는 연관관계를 매핑하는 것과는 아무 관련이 없다. 단지 연관된 엔티티도 같이 영속화하는 편리함을 제공할 뿐 
+
+
+## 9. 값 타입
+
+### 복합 값 타입 (Embeddable, Embedded)
+```java 
+@Entity
+public class Member {
+  
+  @Id @GeneratedValue
+  private Long id;
+  private String name;
+  
+  @Embedded Period workPeriod;
+  @Embedded Address homeAddress
+}
+```
+
+```java
+@Embeddable
+public class Period{
+
+  @Temporal(TemporalType.DATE) Date startDate;
+  @Temporal(TemporalType.DATE) Date endDate;
+  
+}
+```
+
+```java
+@Embeddable
+public class Address{
+
+  @Column(name="city")
+  private String city;
+  private String street;
+  private String zipcode;
+  
+}
+```
+
+
+
+### 값 타입과 불변객체
+객체의 공유참조는 피할수 없다. - 자바는 기본타입이면 값을 복사하고, 객체면 참조를 넘긴다.
+1. 단순한 방법은 setter()메소드를 제거하는 것
+2. 불변객체로 만드는 것 ( 1번의 방법을 통해서 구성함 )
+
+|종류 |엔티티 타입  |값 타입|
+-----|----------|-----|
+|1   |식별자가 있다 |식별자가 없다|
+|2   |생명주기가 있다|생명주기가 없다|
+|3   |참조값을 공유한다.|공유하지 않는 것이 안전|
+
+
+
 
 
 
