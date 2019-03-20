@@ -14,7 +14,7 @@
 1. 인수에 질문을 던지는 경우 `boolean fileExists("myFile")`
 2. 인수를 뭔가로 변환해 결과를 반환하는 경우 `InputStream fileOpen("myFile")` 은 Strin형을 반환
 
-- **플래그 인수는 추하다 52
+- **플래그 인수는 추하다** 52
 - 함수 이름에 키워드를 추가하는 형식 - assertEquals() 보다 assertExpectedEqualsActual(expected, actual) 이 좋다.ㄱ
 - 함수는 뭔가를 수행하거나 뭔가에 답하거나 둘 중 하나만 해야함 56
 - try/catch 블록 뽑아내기 
