@@ -1,5 +1,6 @@
 # study
 This is Repository for summary of study
 
-- [jpa summary](./study/jpa.md)
-- [effective-java](./study/effective-java.md)
+- [JPA](./study/jpa.md)
+- [Effective Java](./study/effective-java.md)
+- [Clean Code](./study/clean-code.md)
