@@ -40,3 +40,5 @@ private void logError(Exception e){
   logger.log(e.getMessage());
 }
 ```
+
+- 오류 코드 대신 예외를 사용 한다.
