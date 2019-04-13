@@ -1,6 +1,6 @@
-# study
-This is Repository for summary of study
+# Study
 
 - [JPA](./jpa.md)
 - [Effective Java](./effective-java.md)
 - [Clean Code](./clean-code.md)
+- [REST API](https://restfulapi.net/)
