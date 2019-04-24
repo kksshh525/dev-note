@@ -1,8 +1,19 @@
 > HTTP REST 
 
+<!-- TOC -->
 
+- [REST의 기본 요소](#rest의-기본-요소)
+- [HTTP 메서드](#http-메서드)
+- [URL 동사 보다 명사를 사용한다.](#url-동사-보다-명사를-사용한다)
+- [리소스간의 관계 표현하는 방법](#리소스간의-관계-표현하는-방법)
+- [검색](#검색)
+- [전역 검색과 리소스 검색](#전역-검색과-리소스-검색)
+- [단일 API URL](#단일-api-url)
+- [참조](#참조)
 
-### REST의 기본 요소 
+<!-- /TOC -->
+
+## REST의 기본 요소 
 
 - 리소스
 - 메서드
@@ -30,7 +41,7 @@ POST 방식으로 `api/v1/users`  요청하고 바디로 해당 데이터를 넘
 
 
 
-### HTTP 메서드
+## HTTP 메서드
 
 | 메서드 | 의미   | Idempotent |
 | ------ | ------ | ---------- |
@@ -49,7 +60,7 @@ HTTP 메서드가 각각 행위를 정의한다. idempotent는 같은 동작을 
 
 
 
-### URL 동사 보다 명사를 사용한다. 
+## URL 동사 보다 명사를 사용한다. 
 
 REST API는 리소스에 대해서 행동을 정의함
 
@@ -76,7 +87,7 @@ POST /setTeam/{id}
 
 
 
-### 리소스간의 관계 표현하는 방법
+## 리소스간의 관계 표현하는 방법
 
 위에서도 예제를 통해서 들었지만 `/resource/{identifier}/other-related-resources` 형태로 정의한다. 
 
@@ -90,7 +101,7 @@ GET /teams/3/groups/4
 
 
 
-### 검색 
+## 검색 
 
 일반적으로 HTTP GET은 QueryString을 사용한다. 이 경우 검색조건이 다른 Query String과 섞일 수 있다. 
 
@@ -106,7 +117,7 @@ GET /teams/3/groups/4
 
 
 
-#### 전역 검색과 리소스 검색
+## 전역 검색과 리소스 검색
 
 전역 검색은  /search?q=name%3Dandrew
 
@@ -114,7 +125,7 @@ GET /teams/3/groups/4
 
 
 
-### 단일 API URL 
+## 단일 API URL 
 
 API 서버가 물리적으로 분리된 경우, 여러개의 서버에서 동작하고 있을 때, `account.apiserver.com`, `appapiserver.com`  과 같을 때 HAProxy나 nginx reverse proxy를 사용할 수 있다.
 

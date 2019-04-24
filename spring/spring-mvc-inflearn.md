@@ -1,7 +1,32 @@
 > 인프런 백기선님의 Spring MVC 강의를 보고 정리한 내용입니다.
 
+<!-- TOC -->
 
-## 들어가며
+- [들어가며](#%EB%93%A4%EC%96%B4%EA%B0%80%EB%A9%B0)
+	- [서블릿](#%EC%84%9C%EB%B8%94%EB%A6%BF)
+	- [서블릿 리스너와 필터?](#%EC%84%9C%EB%B8%94%EB%A6%BF-%EB%A6%AC%EC%8A%A4%EB%84%88%EC%99%80-%ED%95%84%ED%84%B0)
+	- [Dispatcher Servlet 동작 원리](#dispatcher-servlet-%EB%8F%99%EC%9E%91-%EC%9B%90%EB%A6%AC)
+		- [DispatcherServlet 디버깅](#dispatcherservlet-%EB%94%94%EB%B2%84%EA%B9%85)
+- [Spring MVC 구성요소](#spring-mvc-%EA%B5%AC%EC%84%B1%EC%9A%94%EC%86%8C)
+		- [DispatcherServlet 기본전략](#dispatcherservlet-%EA%B8%B0%EB%B3%B8%EC%A0%84%EB%9E%B5)
+		- [다양한 DispatcherServlet 전략들](#%EB%8B%A4%EC%96%91%ED%95%9C-dispatcherservlet-%EC%A0%84%EB%9E%B5%EB%93%A4)
+			- [MultipartResolver](#multipartresolver)
+			- [LocaleResolver](#localeresolver)
+			- [ThemeResolver](#themeresolver)
+			- [HandlerMapping](#handlermapping)
+			- [HandlerAdapter](#handleradapter)
+			- [HandlerExceptionResolver](#handlerexceptionresolver)
+			- [RequestToViewNameTranslator](#requesttoviewnametranslator)
+			- [ViewResolver](#viewresolver)
+			- [FlashMapManager](#flashmapmanager)
+	- [핸들러 인터셉터](#%ED%95%B8%EB%93%A4%EB%9F%AC-%EC%9D%B8%ED%84%B0%EC%85%89%ED%84%B0)
+	- [리소스 핸들러](#%EB%A6%AC%EC%86%8C%EC%8A%A4-%ED%95%B8%EB%93%A4%EB%9F%AC)
+	- [HTTP 메세지 컨버터](#http-%EB%A9%94%EC%84%B8%EC%A7%80-%EC%BB%A8%EB%B2%84%ED%84%B0)
+
+<!-- /TOC -->
+
+
+# 들어가며
 
 자바 EE는 웹애플리케이션을 개발 할 수 있는 HTTP Servlet 스펙과 API를 제공한다. 스프링 MVC는 서블릿 기반의 애플리케이션 개발할 때 보다 쉽고 빠르게 개발 할 수 있는 프레임워크를 제공한다.
 
