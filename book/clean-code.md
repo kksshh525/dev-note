@@ -1,3 +1,5 @@
+> Clean Code를 읽고 정리한 내용입니다.
+
 # CleanCode
 
 ## 2장 의미있는 이름
