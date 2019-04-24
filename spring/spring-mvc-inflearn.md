@@ -1,5 +1,79 @@
--  spring MVC 가 servelt container가 먼저 뜨고, Application ContextLoad, Dispatcher Servlet을 통해서 연결한다면
+> 인프런 백기선님의 Spring MVC 강의를 보고 정리한 내용입니다.
 
+
+
+## 들어가며
+
+자바 EE는 웹애플리케이션을 개발 할 수 있는 HTTP Servlet 스펙과 API를 제공한다. 스프링 MVC는 서블릿 기반의 애플리케이션 개발할 때 보다 쉽고 빠르게 개발 할 수 있는 프레임워크를 제공한다.
+
+
+
+
+
+## 서블릿
+
+서블릿 
+
+- 자바 EE는 웹 애플리케이션 개발용 스펙과 API 제공
+- 요청 당 스레드(만들거나, 풀에서 가져다가 사용)
+- 중요한 클래스 중 하나 HttpServlet
+
+
+
+서블릿 이전에 사용하던 기술 CGI 
+
+- 요청 당 프로세스 만들어서 사용
+
+
+
+서블릿 생명주기
+
+- 서블릿 컨테이너가 서블릿 인스턴스의 init() 메소드를 호출하여 초기화 한다.
+
+- - 최초 요청을 받았을 때 한번 초기화 하고 나면 그 다음 요청부터는 이 과정을 생략한다.
+
+- 서블릿이 초기화 된 다음부터 클라이언트의 요청을 처리할 수 있다. 각 요청은 별도의 쓰레드로 처리하고 이때 서블릿 인스턴스의 service() 메소드를 호출한다.
+
+- - 이 안에서 HTTP 요청을 받고 클라이언트로 보낼 HTTP 응답을 만든다.
+  - service()는 보통 HTTP Method에 따라 doGet(), doPost() 등으로 처리를 위임한다.
+  - 따라서 보통 doGet() 또는 doPost()를 구현한다.
+
+- 서블릿 컨테이너 판단에 따라 해당 서블릿을 메모리에서 내려야 할 시점에 destroy()를 호출한다.
+
+
+
+
+
+## 서블릿 리스너와 필터?
+
+서블릿 리스너
+
+- 웹 애플리케이션에서 발생하는 주요 이벤트를 감지하고 각 이벤트에 특별한 작업이 필요한 경우에 사용할 수 있다.
+
+- - 서블릿 컨텍스트 수준의 이벤트
+
+  - - 컨텍스트 라이프사이클 이벤트
+    - 컨텍스트 애트리뷰트 변경 이벤트
+
+  - 세션 수준의 이벤트
+
+  - - 세션 라이프사이클 이벤트
+    - 세션 애트리뷰트 변경 이벤트
+
+서블릿 필터
+
+- 들어온 요청을 서블릿으로 보내고, 또 서블릿이 작성한 응답을 클라이언트로 보내기 전에 특별한 처리가 필요한 경우에 사용할 수 있다.
+- 체인 형태의 구조
+
+![img](https://lh6.googleusercontent.com/7laA8AB0wDUrOkRV9LA2E9saOuip6pE-HX9X6Fr05oQJjw45tf206Hzz93ibYbIx814PL4xC5RDeCsUr0dYCbO-FFA149TTXly3Z8w-9hPmMyEI0g83tZiiAS6h92sKTHVwad4yQ)
+
+
+
+
+
+## Dispatcher Servlet 동작 원리
+
+-  spring MVC 가 servelt container가 먼저 뜨고, Application ContextLoad, Dispatcher Servlet을 통해서 연결한다면
 - Srping Boot는 스프링부트가 먼저 뜨고, 그 안에 내장된 톰캣에 코드로 servlet을 띄운다.  
 
 
