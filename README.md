@@ -2,15 +2,14 @@
 
 ## Spring
 
-- [JPA](./jpa.md)
-
-
+- [JPA](./spring/jpa.md)
 
 
 
 ## Web
 
-
+- [HTTP 기초](./web/http.md)
+- [REST API](./web/rest-api.md)
 
 
 
@@ -20,8 +19,8 @@
 
 ## 책
 
-- [Effective Java](./effective-java.md)
+- [Effective Java](./book/effective-java.md)
 
-- [Clean Code](./clean-code.md)
+- [Clean Code](./book/clean-code.md)
 
   
