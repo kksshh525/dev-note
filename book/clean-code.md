@@ -1,4 +1,9 @@
-> Clean Code를 읽고 정리한 내용입니다.
+> 클린 코드를 읽고 정리한 내용입니다.
+
+
+
+![](http://image.yes24.com/Goods/11681152/800x0)
+
 <!-- TOC -->
 
 - [CleanCode](#cleancode)
