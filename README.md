@@ -9,6 +9,8 @@
 ## Spring
 
 - [JPA](./spring/jpa.md)
+- [Spring MVC - 백기선님](./spring/spring-mvc-inflearn.md)
+- 
 
 
 
@@ -23,10 +25,16 @@
 
 
 
-## 책
+## i책
 
 - [Effective Java](./book/effective-java.md)
 
 - [Clean Code](./book/clean-code.md)
+
+- [리팩토링](./book/리팩토링.md)
+
+- [켄트벡의 구현패턴](./book/켄트벡의 구현패턴.md)
+
+- 
 
   
