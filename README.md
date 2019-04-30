@@ -18,20 +18,25 @@
 - [HTTP 기초](./web/http.md)
 - [REST API](./web/rest-api.md)
 
+
+
+## OOP
+
+- [객체지향 5대 원칙](./oop/객체지향5대원칙.md)
+
 ## 책
 
-- [Effective Java](./book/effective-java.md)
-
+- [Effective Java 3판](./book/effective-java.md)
 - [Clean Code](./book/clean-code.md)
-
 - [리팩토링](./book/리팩토링.md)
-
 - [켄트벡의 구현패턴](./book/켄트벡의구현패턴.md)
+- [자바ORM 표준 JPA 프로그래밍](./book/jpa.md)
 
 
-## 좋은 글 타래
 
-- [좋은글](./글모음.md)
+## 도움이 될만한 글 & 영상 모음
+
+- [글모음](./글모음.md)
 
 
 
