@@ -461,3 +461,9 @@ Default 서블릿
 
 
 HTTP 메세지 컨버터는 @RequestBody, @ResponseBody인 경우에 본문을 읽어 들이는 용도로 사용한다.  
+
+
+
+- contentType = 요청 본문에  이 컨텐츠가 어떤 타입인지 서버에 알려준다. 
+- accept =  이 요청에 대한 응답으로, 어떤 데이터가 담길지를 원한다. 
+
