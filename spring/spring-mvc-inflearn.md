@@ -467,3 +467,64 @@ HTTP 메세지 컨버터는 @RequestBody, @ResponseBody인 경우에 본문을 �
 - contentType = 요청 본문에  이 컨텐츠가 어떤 타입인지 서버에 알려준다. 
 - accept =  이 요청에 대한 응답으로, 어떤 데이터가 담길지를 원한다. 
 
+
+
+## 31. HTTP 요청 매핑하기 - 요청 메서드
+
+Http Method
+
+- GET, POST, PUT, PATCH, DELETE 등등
+
+GET 요청
+
+- 클라이언트가 서버의 리소스를 요청할 때 사용한다. 
+- 캐싱할 수 있다. 
+- 브라우저 기록에 남는다.
+- 북마크 할 수 있다.
+- 민감한 데이터를 보낼 때 사용하지 말것
+- Idemponent
+
+
+
+Post 요청
+
+- 클라이언트가 서버의 리소스를 수정하거나 새로 만들때 사용한다.
+- 서버에 보내는 데이터를 POST요청 본문에 담는다.
+- 캐시 할 수 없다. 
+- 브라우저 기록에 남지 않는다.
+- 북마크 할 수 없다.
+- 데이터 길이 제한이 없다. 
+
+
+
+PUT 요청
+
+- URI에 해당하는 데이터를 새로 만들거나 수정할 때 사용한다.
+- POST와 다른점은 URI에 대한 의미가 다르다. 
+  - POST의 URI는 보내는 데이터를 처리할 리소스를 지칭하며
+  - PUT의 URI는 보내는 데이터에 해당하는 리소스를 지칭한다. 
+- Idempotent
+
+
+
+PATCH 요청
+
+- PUT과 비슷하지만, 기존 엔티티와 새 데이터의 차이점만 보낸다는 차이가 있다. 
+- Idempotent
+
+
+
+DELETE 요청
+
+- URI에 해당하는 리소스를 삭제할 때 사용한다.
+- Idempotent 
+
+
+
+스프링 웹 MVC에서 HTTP method 맵핑하기
+
+- @RequestMapping(method= RequestMethod.GET)
+- @RequestMapping(method= {RequestMethod.GET, RequestMethod.POST})
+- @GetMapping, @PostMapping, 
+- 
+
