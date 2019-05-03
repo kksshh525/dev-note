@@ -526,5 +526,38 @@ DELETE 요청
 - @RequestMapping(method= RequestMethod.GET)
 - @RequestMapping(method= {RequestMethod.GET, RequestMethod.POST})
 - @GetMapping, @PostMapping, 
-- 
 
+
+
+
+
+## 32. HTTP 요청 맵핑하기 - URI패턴 맵핑
+
+URI, URL, URN 헷갈린다. 
+
+- URI가 더 큰 개념 
+
+
+
+요청 식별자로 맵핑하기
+
+- @RequestMapping은 다음 패턴을 지원한다.
+- ?: 한 글자("/author/???" => "author/123")
+- *: 여러 글자 ("author/\*" => "author/andrew" )
+- **: 여러 패스 ("author/\*\*" => "author/andrew/book")
+
+
+
+클래스에 선언한 @RequestMapping과 조합
+
+- 클래스에 선언한 URI패턴 뒤에 이어 붙여서 맵핑 가능
+
+
+
+정규표현식 가능
+
+- /{name:[a-z]+} 
+
+패턴이 중복되는 경우?
+
+- 
