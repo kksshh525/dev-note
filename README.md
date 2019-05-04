@@ -8,7 +8,6 @@
 
 ## Spring
 
-- [JPA](./spring/jpa.md)
 - [Spring MVC - 백기선님](./spring/spring-mvc-inflearn.md)
 
   
