@@ -683,5 +683,15 @@ https://www.w3.org/Protocols/rfc2616/rfc2616-sec9.html
 
 
 
+핸들러 메서드 리턴: 주로 응답 또는 모델을 랜더링할 뷰에 대한 정보를 제공하는데 사용한다. 
+
+|                               |                                                              |
+| ----------------------------- | ------------------------------------------------------------ |
+| @ResponseBody                 | 리턴 값을 HttpMessageConverter를 사용해 응답 본문으로 사용한다. |
+| HttpEntity<br />ResonseEntity | 응답 본문 뿐 아니라 헤더 정보까지, 전체 응답을 만들 때 사용한다. |
+| String                        | ViewResolver를 사용해서 뷰를 찾을 때 사용할 뷰 이름          |
+| View                          | 암묵적인 모델 정보를 랜더링할 뷰 인스턴스                    |
+| Map<br />Model                | (RequestToViewNameTranlator를 통해서) 암묵적으로 판단한 뷰 랜더링할때 사용할 모델 정보에 추가한다. 이 애노테이션은 생략할 수 있다. |
+
 
 
