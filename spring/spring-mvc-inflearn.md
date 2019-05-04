@@ -665,9 +665,21 @@ https://www.w3.org/Protocols/rfc2616/rfc2616-sec9.html
 
 
 
+## 38. 핸들러 메서드 : 지원하는 메서드 아규먼트와 리턴 타입
 
+핸들러 메서드 아규먼트: 주로 요청 그 자체 또는 요청에 들어있는 정보를 받아오는데 사용한다. 
 
-
+| 핸들러 메서드 아규먼트                                       | 설명                                                         |
+| ------------------------------------------------------------ | ------------------------------------------------------------ |
+| WebRequest<br />NativeWebRequest<br />ServletRequest(Response)<br />HttpServletRequest(Response) | 요청 또는 응답 자체에 접근 가능한 API                        |
+| InputStream<br />Reader<br />OutputStream<br />Writer        | 요청 본문을 읽어오거나, 응답 본문을 쓸대 사용할 수 있는 API  |
+| PushBuilder                                                  | 스프링 5, HTTP/2 리소스 푸쉬에 사용                          |
+| HTTPMethod                                                   | GET, POST, 등에 대한 정보                                    |
+| Local<br />TimeZone<br />ZoneId                              | LocaleResolver가 분석한 요청의 Locale 정보                   |
+| @PathVariable                                                | URI템플릿 변수 읽을 때 사용                                  |
+| @RequestParam                                                | 서블릿 요청 매개변수 값을 선언한 메서드 아규먼트 타입으로 변환해준다. 단순 타입인 경우에 이 애노테이션을 생략할 수 있다. |
+| @RequstHeader                                                | 요청 헤더 값을 선언한 메서드 아규먼트 타입으로 변환해 준다.  |
+|                                                              |                                                              |
 
 
 
