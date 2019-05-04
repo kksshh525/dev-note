@@ -2,8 +2,6 @@
 
 
 
-![](http://image.yes24.com/Goods/11681152/800x0)
-
 <!-- TOC -->
 
 - [CleanCode](#cleancode)
