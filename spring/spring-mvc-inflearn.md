@@ -558,6 +558,45 @@ URI, URL, URN 헷갈린다.
 
 - /{name:[a-z]+} 
 
+
+
 패턴이 중복되는 경우?
 
-- 
+- 가장 구체적으로 맵핑되는 핸들러를 선택한다. 
+
+
+
+URI 확장자 맵핑 지원
+
+- 이 기능은 권장하지 않는다. (스프링 부트에서는 기본으로 이 기능을 사용하지 않도록 설정 해줌)
+  - 보안이슈 (RFD Attack)
+  - URI 변수, Path 매개변수, URI 인코딩을 사용할 때 불명확함
+
+
+
+## 33. HTTP 요청 맵핑하기 - 컨텐츠 타입 맵핑
+
+특정한 타입의 데이터를 담고 있는 요청만 처리하는 핸들러
+
+- @RequestMapping(consumes=MediaType.APPLICATION_JSON_UTF8_VALUE) - 이런 요청만 처리하겠다. 
+- Content-type 헤더로 필터링
+- 매치되지 않는 경우에 415 Not Supported Media Type 응답
+
+
+
+특정한 타입의 응답을 만드는 핸들러 
+
+- @RequestMapping(produces= "application/json")
+- Accept 헤더로 필터링 
+- 매치되지 않는 경우에 406 Not Supported 응답
+
+> 문자열 ("application/json") 입력하는 대신 MEdiaType을 사용하면 상수를 자동완성으로 사용 할 수 있다.
+
+> 클래스에 선언한 @RequestMapping에 사용한 것과 조합되지 않고 메서드에 사용한 @RequestMapping의 설정으로 덮어 쓴다. 
+
+
+
+
+
+
+
