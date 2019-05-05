@@ -695,3 +695,33 @@ https://www.w3.org/Protocols/rfc2616/rfc2616-sec9.html
 
 
 
+## 39. 핸들러 메서드 - URI 패턴
+
+@PathVariable
+
+- 요청 URI 패턴의 일부를 핸들러 메서드 아규먼트로 받는 방법
+- 타입변환 지원
+- 기본 값이 반드시 있어야 한다.
+- Optional 지원 - null safe 함
+
+@MatrixVariable
+
+- 요청 URI 패턴에서 키/밸류 쌍의 데이터를 메서드 아규먼트로 받는 방법
+- 타입 변환 지원
+- (기본) 값이 반드시 있어야 한다.
+- Optional 지원
+- 이 기능은 기본적으로 비활성화 되어 있음. 활성화 하려면 다음과 같은 설정이 필요
+
+```java
+@Configuration
+public class WebConfig implements WebMvcConfigurer {
+
+    @Override
+    public void configurePathMatch(PathMatchConfigurer configurer) {
+        UrlPathHelper urlPathHelper = new UrlPathHelper();
+        urlPathHelper.setRemoveSemicolonContent(false);
+        configurer.setUrlPathHelper(urlPathHelper);
+    }
+}
+```
+
