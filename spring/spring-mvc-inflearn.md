@@ -744,3 +744,124 @@ public class WebConfig implements WebMvcConfigurer {
 
 - 쿼리 매개변수
 - 폼 데이터
+
+
+
+
+
+## 42. 핸들러 메서드 - @ModelAttirbute
+
+@ModelAttirbute
+
+- 여러 곳에 있는 단순 타입 데이터를 복합 타입 객체로 받아오거나 해당 객체를 새로 만들 때 사용할 수 있다.
+- 여러곳? URI 패스, 요청 매개변수, 세션등
+- 생략 가능 
+
+값을 바인딩 할 수 없는 경우에? 
+
+- BindingException 400 에러
+
+바인딩 에러를 직접 다루고 싶은 경우 
+
+- BindingResult 타입의 아규먼트를 바로 오른쪽에 추가한다. 
+
+바인딩 이후에 검증 작업을 추가로 하고 싶은 경우
+
+- @Valid 또는 @Validated 애노테이션을 사용한다. 
+
+
+
+
+
+
+
+## 43. 핸들러 메서드 - @Validated
+
+스프링 MVC 핸들러 메서드 아규먼트에 사용할 수 있으며, validation group이라는 힌트를 사용할 수 있다. 
+
+@Valid 애노테이션에는 그룹을 지정할 방법이 없다. 
+
+@Validated는 스프링이 제공하는 애노테이션으로 그룹 클래스를 설정할 수 있다. 
+
+
+
+
+
+## 45. 핸들러 메서드 - @SessionAttributes 
+
+- 해당 클래스 안에 있는 session 정보를 model에다가 넣어주는 용도 
+
+
+
+
+
+## 46. 핸들러 메서드 - 멀티폼 
+
+세션을 사용해서 여러 폼에 걸쳐 데이터를 나눠 입력 받고 저장하기
+
+- 이벤트 이름 입력 받고 
+- 이벤트 제한limit 인원 입력받고
+- 서브밋 -> 이벤트 목록으로 ! 
+
+
+
+완료된 경우에 세션에서 모델 객체 제거하기
+
+- SessionStatus
+
+
+
+## 47. 핸들러 메서드 - @SessionAttirbute
+
+Http 세션에 들어있는 값 참조할 때 사용
+
+- HttpSession을 사용할 때 비해 타입 컨버전을 자동으로 지원하기 때문에 조금 편함
+- HttpSession에 데이터를 넣고 빼고 싶은 경우에는 HttpSession사용할 것
+
+
+
+@SessionAttributes 와는 다르다.
+
+- **<u>@SessionAttributes는 해당 컨트롤러 내에서만 동작 ( 클래스 내 )</u>**
+  - 즉, 해당 컨트롤러 안에서 다루는 특정 모델 객체를 세션에 넣고 공유할 때 사용
+- **<u>@SessionAttribute는 컨트롤러 밖(인터셉터 또는 필터등)에서 만들어준 세션 데이터에 접근할 때 사용한다.</u>*
+
+
+
+
+
+## 48. 핸들러 메서드 - RedirectAttributes
+
+리다이렉트할 때 기본적으로 Model에 들어있는 primitive type 데이터는 URI 쿼리 매개변수에 추가된다. 
+
+- 스프링 부트에서는 이 기능이 기본적으로 비활성화 되어있다. 
+- `spring.mvc.ignore-default-model-on-redirect=false`  프로퍼티를 사용해서 활성화 할 수 있다. 
+
+원하는 값만 리다이렉트할 때 전달하고 싶다면 RedirectAttributes에 명시적으로 추가할 수 있다. 
+
+리다이렉트 요청을 처리하는 쪽에서 쿼리 매개변수를 @RequestParam 또는 @ModelAttribute로 받을 수 있다. 
+
+
+
+
+
+## 49. 핸들러 메서드 - Flash Attributes
+
+주로 리다이렉트시에 데이터를 전달할 때 사용한다. 
+
+- 데이터가 URI에 노출되지 않는다.
+- 임의의 객체를 저장할 수 있다.
+- 보통 HTTP 세션을 사용한다.
+
+리다이렉트 하기 전에 데이터를 HTTP 세션에 저장하고 리다이렉트 요청을 처리 한 다음 그 즉시 제거한다. 그래서 Flash 임
+
+RedirecAttributues를 통해 사용할 수 있다.
+
+받는 쪽은 Model를 통해서 사용할 수 있다. 
+
+
+
+
+
+- dispatcher servlet- 서블릿- 초기화 과정이있다.
+-  
