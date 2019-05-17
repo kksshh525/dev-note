@@ -26,7 +26,6 @@ I Insipred from [cheese10yun](<https://github.com/cheese10yun/>) TIL of reposito
 - [Implementation Patterns Of KentBack](./book/켄트벡의구현패턴.md)
 - [자바ORM 표준 JPA 프로그래밍](./book/jpa.md)
 - [스프링 레시피5](./book/스프링-레시피5.md)
-- 
 
 
 
