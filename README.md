@@ -2,7 +2,23 @@
 
 # TIL
 
-> Today I Learend!
+> Today I Learend  && every day read book
+
+
+
+## Outline
+
+목표: 🐧월 단위 단기적인 목표 설정과 이를 지속하기 위한 Repository
+
+규칙 
+
+- 책 한권을 선정
+- 하루의 분량 => 날짜를 산정
+- 각 챕터의 중요도를 Summary (차례대로 하지 않아도 됨)
+  - 책 전체를 할 필요는 없다.
+- 요약 했던 내용들을 수시로 어떤 부분이 있는지 확인 및 반복학습
+
+
 
 
 
