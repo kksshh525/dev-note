@@ -2,7 +2,7 @@
 
 # TIL
 
-> Today I Learend  && every day read book
+> Today I Learend  ( 매주 수요일 / 토요일 StudyDay! )
 
 
 

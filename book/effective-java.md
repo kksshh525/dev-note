@@ -998,4 +998,38 @@ map.merge(key, 1, Integer::sum)
 
 
 
-## 
+## 아이템 72 - 표준 예외를 사용하라
+
+- 예외도 마찬가지로 재사용하는 것이 좋다
+- Exception, RuntimeException, Throwable, Error는 직접 재사용하지 말자.
+
+
+
+| 예외                            | 주요쓰임                                                     |
+| ------------------------------- | ------------------------------------------------------------ |
+| IllegalArgumentException        | 허용하지 않는 값이 인수로 건네졌을 때(null은 따로 NullPointerException으로 처리) |
+| IllegalStateException           | 객체가 메서드를 수행하기에 적절하지 않은 상태일 때           |
+| NullPointerException            | null을 허용하지 않는 메서드에 null을건넸을 때                |
+| IndexOutOfBoundException        | 인덱스 범위가 넘어 섰을 때                                   |
+| ConcurrentModificationException | 허용하지 않는 동시 수정이 발견됐을 때                        |
+| UnsupportedOperationException   | 호출한 메서드를 지원하지 않을 때                             |
+
+
+
+
+
+## 아이템 73 - 추상화 수준에 맞는 예외를 던지라
+
+- 수행하려는 일과 관련없어 보이는 예외가 튀어나오면 당황스러울 것이다. 메서드가 저수준 예외를 처리하지 않고 바깥으로 전파해버릴 때 종종 일어나는 일이다. 
+  - 이 문제를 피하려면 상위 계층에서는 저 수준 예외를 잡아 자신의 추상화 수준에 맞는 예외로 바꿔 던져야 한다. 이를 예외 번역이라 한다. 
+
+```java
+try {
+  ...
+} catch (LowerLevelException e){
+  throw new HigherLevelException(...);
+}
+```
+
+- 예외를 번역할때, 저 수준 예외가 디버깅에 도움이 된다면 예외 연쇄를 사용하는게 좋다.
+  - 예외 연쇄(exception chaining)란 문제의 근본 원인인 저 수준 예외를 고수준 예외에 실어 보내는 방식이다. 그러면 별도의 접근자 메서드(Throwable의 getCauese 메서드)를 통해 필요하면 언제든 저수준 예외를 꺼내 볼 수 있다. 
