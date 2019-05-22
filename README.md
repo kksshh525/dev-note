@@ -24,7 +24,7 @@
 
 ## 책 
 
-- [이펙티브 자바 3판](./book/effective-java.md)
+- [이펙티브 자바 3판 [5월 ~ ] ](./book/effective-java.md)
 
 - [리팩토링](./book/refactoring.md)
 
