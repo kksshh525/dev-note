@@ -1,3 +1,5 @@
+![](http://image.yes24.com/Goods/19040233/800x0)
+
 > 자바 ORM 표준 JPA 프로그래밍을 읽고 정리한 내용입니다.
 
 # JPA 요약

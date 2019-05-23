@@ -2,7 +2,9 @@
 
 # TIL
 
-> Today I Learend!
+> Today I Learend! 세상이 쓸모없는 공부는 없다.
+
+
 
 
 
