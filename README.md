@@ -1,6 +1,6 @@
 # TIL
 
-> Today I Learend! 세상에 쓸모없는 공부는 없다.
+> Today I Learend! 세상에 쓸모없는 공부는 없다. ~
 
 
 
