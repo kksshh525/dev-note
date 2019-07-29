@@ -25,5 +25,6 @@
 
 ## Web
 - [cache](./web/cache.md)
+- [REST API](./web/rest-api.md)
 
 
