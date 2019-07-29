@@ -10,6 +10,7 @@
 - [자바 ORM표준 JPA프로그래밍](./book/jpa.md)
 - [자바 웹 프로그래밍 NEXT-STEP](./book/java-webprogramming-next-step.md)
 - [그림으로 배우는 Httpnetwork](./web/http-network-basic.md)
+- [실용주의 사고와 학습](./book/실용주의사고와학습.md)
 
 ## OOP
 - [객체지향 프로그래밍 입문 - 인프런](./oop/oop-beginner-inflearn.md)
