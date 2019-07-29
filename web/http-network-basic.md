@@ -1,7 +1,3 @@
-![](http://image.yes24.com/momo/TopCate448/MidCate010/44791452.jpg)
-
-
-
 > 그림으로 배우는 Httpnetwork 를 읽고 정리한 내용입니다. 
 
 

@@ -1,5 +1,3 @@
-![](http://image.yes24.com/momo/TopCate61/MidCate01/6000216.jpg)
-
 >  켄트벡의 구현 패턴을 읽고 정리한 내용입니다. 
 
 
