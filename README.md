@@ -1,6 +1,5 @@
 # Summary 
 - 내가 알고 있는거 요약 및 정리용 Repository 🐶
-- Ref. [Teck Interview](https://github.com/umanking/tech-interview)
 
 ## Book
 - [이펙티브 자바](./book/effective-java.md)
@@ -8,7 +7,6 @@
 - [클린코드](./book/cleancode.md)
 - [오브젝트](./book/object.md)
 - [자바 ORM표준 JPA프로그래밍](./book/jpa.md)
-- [자바 웹 프로그래밍 NEXT-STEP](./book/java-webprogramming-next-step.md)
 - [그림으로 배우는 Httpnetwork](./web/http-network-basic.md)
 - [실용주의 사고와 학습](./book/실용주의사고와학습.md)
 
