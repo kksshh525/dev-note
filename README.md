@@ -1,5 +1,5 @@
 # Summary 
-- 내가 알고 있는거 요약 및 정리용 Repository 🐶
+- 정리용 Repsoitory
 
 ## Book
 - [이펙티브 자바](./book/effective-java.md)
@@ -10,16 +10,9 @@
 - [그림으로 배우는 Httpnetwork](./web/http-network-basic.md)
 - [실용주의 사고와 학습](./book/실용주의사고와학습.md)
 
-## OOP
-- [객체지향 프로그래밍 입문 - 인프런](./oop/oop-beginner-inflearn.md)
-
-## Link
-- [읽어보면 좋은 링크모음](./ref/reference.md)
-
-## Java
+## Back
 - [Java8 정리](./java/java8.md)
-
-## Spring
+- [객체지향 프로그래밍 입문](./oop/oop-beginner-inflearn.md)
 - [Spring MVC (인프런)](./spring/spring-mvc-inflearn.md)
 
 ## Web
