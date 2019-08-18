@@ -1,5 +1,5 @@
 # Summary 
-- 정리용 Repsoitory
+정리용 Repsoitory
 
 ## Book
 - [이펙티브 자바](./book/effective-java.md)
