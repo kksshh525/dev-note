@@ -11,10 +11,4 @@
 - [실용주의 사고와 학습](./book/실용주의사고와학습.md)
 
 ## Back
-- [Java8 정리](./java/java8.md)
 - [객체지향 프로그래밍 입문](./oop/oop-beginner-inflearn.md)
-- [Spring MVC (인프런)](./spring/spring-mvc-inflearn.md)
-
-## Web
-- [cache](./web/cache.md)
-- [REST API](./web/rest-api.md)
