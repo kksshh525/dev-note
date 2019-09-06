@@ -11,6 +11,7 @@ SpringBoot 프로젝트인 경우에 다음과 같은 starter-security 의존성
  </dependency>
 
 -   user가 한 명으로 고정되어 있다.
+    
 -   비밀번호가 애플리케이션을 실행할 때마다 console창에 변경되어 나타난다.
     
 -   권한에 대한 설정이 없다.
@@ -18,6 +19,6 @@ SpringBoot 프로젝트인 경우에 다음과 같은 starter-security 의존성
 
 지금 현재 상황에서 문제점은
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbMTMzODA0MDg2OSwtNzEyNjkyMjYyLDE5OD
-A4MDY2MTldfQ==
+eyJoaXN0b3J5IjpbLTkzMTcxMjA3MywxMzM4MDQwODY5LC03MT
+I2OTIyNjIsMTk4MDgwNjYxOV19
 -->
