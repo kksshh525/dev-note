@@ -5,6 +5,8 @@
 
 SpringBoot 프로젝트인 경우에 다음과 같은 starter-security 의존성을 추가합니다.
 
+    pu
+
  <dependency>   
  <groupId>org.springframework.boot</groupId>   
  <artifactId>spring-boot-starter-security</artifactId>   
@@ -19,6 +21,6 @@ SpringBoot 프로젝트인 경우에 다음과 같은 starter-security 의존성
 
 지금 현재 상황에서 문제점은
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbLTkzMTcxMjA3MywxMzM4MDQwODY5LC03MT
-I2OTIyNjIsMTk4MDgwNjYxOV19
+eyJoaXN0b3J5IjpbNzY5NDk3MzEyLDEzMzgwNDA4NjksLTcxMj
+Y5MjI2MiwxOTgwODA2NjE5XX0=
 -->
