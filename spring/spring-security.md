@@ -1,7 +1,9 @@
 
 # Spring Security Example
 
-> 인프런 강의 요약정리
+> 인프런 Spring Security 강의 요약 내용
+>
+> 소스코드 https://github.com/umanking/spring-security-example 
 
 
 
