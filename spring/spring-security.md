@@ -302,6 +302,12 @@ public class AccountControllerTest {
 
 
 
+지금 구현되어있는 시큐리티(basic Form login)인 경우,Authentication 객체 타입은 `UsernamePasswordToken` 타입의 객체를 리턴하는 것을 알 수 있다. 이는 나중에 다른 token으로 변경할 수 있음을 나타낸다.  
+
+![](https://user-images.githubusercontent.com/28615416/64468193-829c7980-d15c-11e9-992b-b4d9600af88a.png)
+
+
+
 Authentication의 Principal이라는 객체는 이전 코드에서 UserDetailsService 인터페이스를 구현했을 당시에, 리턴문에서 Spring Security가 제공하는 User클래스를 만들어서 리턴했던 정보가 바로 Principal (신원정보) 이다. 
 
 ```java
