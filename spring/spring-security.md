@@ -21,32 +21,32 @@
 
 ```java
 @GetMapping("/")
-    public String index(Model model, Principal principal){
-        if(principal == null){
-            model.addAttribute("message", "Hello Spring Security");
-        }else {
-            model.addAttribute("message", "Hello Spring Security" + principal.getName());
-        }
-        return "index";
-    }
+public String index(Model model, Principal principal){
+  if(principal == null){
+    model.addAttribute("message", "Hello Spring Security");
+  }else {
+    model.addAttribute("message", "Hello Spring Security" + principal.getName());
+  }
+  return "index";
+}
 
-    @GetMapping("/info")
-    public String info(Model model){
-        model.addAttribute("message", "Hello Info");
-        return "info";
-    }
+@GetMapping("/info")
+public String info(Model model){
+  model.addAttribute("message", "Hello Info");
+  return "info";
+}
 
-    @GetMapping("/dashboard")
-    public String dashboard(Model model, Principal principal){
-        model.addAttribute("message", "Hello Dashboard" + principal.getName());
-        return "dashboard";
-    }
+@GetMapping("/dashboard")
+public String dashboard(Model model, Principal principal){
+  model.addAttribute("message", "Hello Dashboard" + principal.getName());
+  return "dashboard";
+}
 
-    @GetMapping("/admin")
-    public String admin(Model model, Principal principal){
-        model.addAttribute("message", "Hello Admin" + principal.getName());
-        return "admin";
-    }
+@GetMapping("/admin")
+public String admin(Model model, Principal principal){
+  model.addAttribute("message", "Hello Admin" + principal.getName());
+  return "admin";
+}
 ```
 
 해당 url로 들어왔을때 return은 해당 페이지로 리턴하고, Principal 정보를 파라미터로 넘겨서 User의 정보를 확인할 수 있다. 실제 index, info, dashboard, admin은 모두다 html, thymleaf엔진을 사용해서 컨트롤러단에서 넘겨준 `message`만을 받는 단순한 구성으로 각 페이지에 대한 설명은 생략한다. 애플리케이션을 실행해 보면 `/` , `/info` 요청을 제외한 나머지 요청들은 Spring에서 제공하는 에러페이지가 나온다. 
@@ -60,10 +60,10 @@
 SpringBoot 프로젝트인 경우에 다음과 같은 starter-security 의존성을 추가 한다. 
 
 ```java
- <dependency>   
-	 <groupId>org.springframework.boot</groupId>   
-	 <artifactId>spring-boot-starter-security</artifactId>   
- </dependency>
+<dependency>   
+	<groupId>org.springframework.boot</groupId>   
+	<artifactId>spring-boot-starter-security</artifactId>   
+</dependency>
 ```
 
 
@@ -116,10 +116,10 @@ SecurityConfig에서 메서드 인자로 AuthenticationBuilder를 넘겨주는 c
 
 ```java
 @Override
-    protected void configure(AuthenticationManagerBuilder auth) throws Exception {
-        auth.inMemoryAuthentication().withUser("andrew").password("{noop}123").roles("USER")
-                .and().withUser("admin").password("{noop}456").roles("ADMIN");
-    }
+protected void configure(AuthenticationManagerBuilder auth) throws Exception {
+  auth.inMemoryAuthentication().withUser("andrew").password("{noop}123").roles("USER")
+    .and().withUser("admin").password("{noop}456").roles("ADMIN");
+}
 ```
 
 위와 같이 inMemoryAuthentication형태로 메서드 체이닝을 통해서 user, password, role들을 설정할 수 있다. 애플리케이션을 실행하고 `/dashboard`  andrew/123 로그인 성공  `/admin`  admin/456 로그인 성공
@@ -139,15 +139,15 @@ SecurityConfig에서 메서드 인자로 AuthenticationBuilder를 넘겨주는 c
 휘발성인 Inmemory가 아닌, DB를 이용한다. (여기서는 Spring Data JPA, H2를 이용한다)
 
 ```xml
-        <dependency>
-            <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-starter-data-jpa</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>com.h2database</groupId>
-            <artifactId>h2</artifactId>
-            <scope>runtime</scope>
-        </dependency>
+<dependency>
+  <groupId>org.springframework.boot</groupId>
+  <artifactId>spring-boot-starter-data-jpa</artifactId>
+</dependency>
+<dependency>
+  <groupId>com.h2database</groupId>
+  <artifactId>h2</artifactId>
+  <scope>runtime</scope>
+</dependency>
 ```
 
 Account, AccountRepository, AccountService를 구현한다. 
@@ -219,7 +219,7 @@ public class AccountController {
 현재 까지 문제는 `{noop}`의 하드코딩, 적절한 PasswordEncorder가 없다. 
 
 ```java
-	@Bean
+		@Bean
     public PasswordEncoder passwordEncoder(){
         return PasswordEncoderFactories.createDelegatingPasswordEncoder();
     }
