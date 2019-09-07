@@ -20,32 +20,37 @@
 요구사항에 맞는 Controller단 구현
 
 ```java
-@GetMapping("/")
-public String index(Model model, Principal principal){
-  if(principal == null){
-    model.addAttribute("message", "Hello Spring Security");
-  }else {
-    model.addAttribute("message", "Hello Spring Security" + principal.getName());
-  }
-  return "index";
-}
+@Controller
+public class SampleController {
 
-@GetMapping("/info")
-public String info(Model model){
-  model.addAttribute("message", "Hello Info");
-  return "info";
-}
+    @GetMapping("/")
+    public String index(Model model, Principal principal){
+        if(principal == null){
+            model.addAttribute("message", "Hello Spring Security");
+        }else {
+            model.addAttribute("message", "Hello Spring Security: " + principal.getName());
+        }
+        return "index";
+    }
 
-@GetMapping("/dashboard")
-public String dashboard(Model model, Principal principal){
-  model.addAttribute("message", "Hello Dashboard" + principal.getName());
-  return "dashboard";
-}
+    @GetMapping("/info")
+    public String info(Model model){
+        model.addAttribute("message", "Hello Info");
+        return "info";
+    }
 
-@GetMapping("/admin")
-public String admin(Model model, Principal principal){
-  model.addAttribute("message", "Hello Admin" + principal.getName());
-  return "admin";
+    @GetMapping("/dashboard")
+    public String dashboard(Model model, Principal principal){
+        model.addAttribute("message", "Hello Dashboard: " + principal.getName());
+        return "dashboard";
+    }
+
+    @GetMapping("/admin")
+    public String admin(Model model, Principal principal){
+        model.addAttribute("message", "Hello Admin: " + principal.getName());
+        return "admin";
+    }
+
 }
 ```
 
@@ -57,16 +62,7 @@ public String admin(Model model, Principal principal){
 
 ## **Spring Security 기본 적용** 
 
-SpringBoot 프로젝트인 경우에 다음과 같은 starter-security 의존성을 추가 한다. 
-
-```java
-<dependency>   
-	<groupId>org.springframework.boot</groupId>   
-	<artifactId>spring-boot-starter-security</artifactId>   
-</dependency>
-```
-
-
+SpringBoot 프로젝트인 경우에 `spring-boot-starter-security` 의존성을 추가 한다. WebSecurityConfigurereAdapter를 상속받아 인자가 http인 configure 메서드를 구현합니다. 내용은 요구사항에 맞게 mvcMatchers에 ant 패턴 형태로 url패턴을 매칭시키고, Role과 권한을 부여한다.
 
 ```java
 @Configuration
@@ -87,7 +83,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
 ```
 
-WebSecurityConfigurereAdapter를 상속받아 인자가 http인 configure 메서드를 구현합니다. 내용은 요구사항에 맞게 mvcMatchers에 ant 패턴 형태로 url패턴을 매칭시키고, Role과 권한을 부여한다. 애플리케이션을 실행하게 되면 콘솔창에 다음과 같은 password가 나온다. 
+ 애플리케이션을 실행하게 되면 콘솔창에 다음과 같은 password가 나온다. 
 
 ![](https://user-images.githubusercontent.com/28615416/64464783-30e7f500-d144-11e9-8e11-8a65c82711b6.png)
 
@@ -95,9 +91,7 @@ WebSecurityConfigurereAdapter를 상속받아 인자가 http인 configure 메서
 
 <img src="https://user-images.githubusercontent.com/28615416/64464842-7d333500-d144-11e9-8bd6-ffdfc3bf6a39.png" style="zoom:40%;" />
 
-기본 default Username은 `user` 이고  패스워드는 위에 콘솔에 출력된 결과물이다. 
-
-조금 더 자세하게 알고 싶다면 **<u>UserDetailSErviceAutoConfiguration</u>** 클래스에서 기본 설정들이 어떻게 만들어 지는 지 확인 하면 된다. 
+기본 default Username은 `user` 이고  패스워드는 위에 콘솔에 출력된 결과물이다. 조금 더 자세하게 알고 싶다면 **<u>UserDetailSErviceAutoConfiguration</u>** 클래스에서 기본 설정들이 어떻게 만들어 지는 지 확인 하면 된다. 
 
 
 
@@ -130,25 +124,13 @@ protected void configure(AuthenticationManagerBuilder auth) throws Exception {
 
 
 
-하지만 여전히 문제는 user에 대한 정보를 Source 코드 상에 하드코딩했다는 점과 모든 유저들을 저런식으로 등록해서 사용할 수 없다. 
+하지만 여전히 문제는 user에 대한 정보를 Source 코드 상에 하드코딩 했다는 점과 모든 유저들을 저런식으로 등록해서 사용할 수 없다. 
 
 
 
 ## DB를 이용한 User관리
 
-휘발성인 Inmemory가 아닌, DB를 이용한다. (여기서는 Spring Data JPA, H2를 이용한다)
-
-```xml
-<dependency>
-  <groupId>org.springframework.boot</groupId>
-  <artifactId>spring-boot-starter-data-jpa</artifactId>
-</dependency>
-<dependency>
-  <groupId>com.h2database</groupId>
-  <artifactId>h2</artifactId>
-  <scope>runtime</scope>
-</dependency>
-```
+휘발성인 Inmemory가 아닌, DB를 이용한다. (여기서는 `spring-boot-starter-data-jpa`, `H2`를 이용한다)
 
 Account, AccountRepository, AccountService를 구현한다. 
 
@@ -219,23 +201,23 @@ public class AccountController {
 현재 까지 문제는 `{noop}`의 하드코딩, 적절한 PasswordEncorder가 없다. 
 
 ```java
-		@Bean
-    public PasswordEncoder passwordEncoder(){
-        return PasswordEncoderFactories.createDelegatingPasswordEncoder();
-    }
+@Bean
+PasswordEncoder passwordEncoder(){
+    return PasswordEncoderFactories.createDelegatingPasswordEncoder();
+}
 ```
 
 PasswordEncoder를 빈으로 등록하고, passwordEncoder의 encode()메서드를 통해서 password를 인코딩한다. `createDelegatingPasswordEncoder()`메서드 기본은 Bcrypt 인코딩을 사용한다. 다른 알고리즘을 바꿔서 적용가능하다.
 
 ```java
-    @Autowired
-    private PasswordEncoder passwordEncoder;
+@Autowired
+private PasswordEncoder passwordEncoder;
 
-    @GetMapping("/account/{role}/{username}/{password}")
-    public Account createAccount(@ModelAttribute Account account){
-        account.setPassword(passwordEncoder.encode(account.getPassword()));
-        return accountRepository.save(account);
-    }
+@GetMapping("/account/{role}/{username}/{password}")
+public Account createAccount(@ModelAttribute Account account){
+    account.setPassword(passwordEncoder.encode(account.getPassword()));
+    return accountRepository.save(account);
+}
 ```
 
 해당 결과를 보면, {bcrypt} Prefix가 붙어있고, 123이라는 비밀번호는 encoding된 문자열로 바뀌어 있다. 
