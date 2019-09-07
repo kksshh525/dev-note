@@ -1,7 +1,11 @@
 
-## Spring Security Example
+# Spring Security Example
 
 > 인프런 강의 요약정리
+
+
+
+## 1. Spring Security 폼인증
 
 
 
@@ -60,7 +64,7 @@ public class SampleController {
 
 
 
-## **Spring Security 기본 적용** 
+### **Spring Security 기본 적용** 
 
 SpringBoot 프로젝트인 경우에 `spring-boot-starter-security` 의존성을 추가 한다. WebSecurityConfigurereAdapter를 상속받아 인자가 http인 configure 메서드를 구현합니다. 내용은 요구사항에 맞게 mvcMatchers에 ant 패턴 형태로 url패턴을 매칭시키고, Role과 권한을 부여한다.
 
@@ -104,7 +108,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
 
 
-## InMemory User관리
+### InMemory User관리
 
 SecurityConfig에서 메서드 인자로 AuthenticationBuilder를 넘겨주는 configure메서드를 구현하자. 
 
@@ -128,7 +132,7 @@ protected void configure(AuthenticationManagerBuilder auth) throws Exception {
 
 
 
-## DB를 이용한 User관리
+### DB를 이용한 User관리
 
 휘발성인 Inmemory가 아닌, DB를 이용한다. (여기서는 `spring-boot-starter-data-jpa`, `H2`를 이용한다)
 
@@ -196,7 +200,7 @@ public class AccountController {
 
 
 
-## PasswordEncoder 사용하기
+### PasswordEncoder 사용하기
 
 현재 까지 문제는 `{noop}`의 하드코딩, 적절한 PasswordEncorder가 없다. 
 
@@ -225,4 +229,93 @@ public Account createAccount(@ModelAttribute Account account){
 ![](https://user-images.githubusercontent.com/28615416/64466816-e61faa80-d14e-11e9-9a12-f9d6df683e8f.png)
 
 
+
+### MockUser 테스트 케이스 
+
+`spring-security-test` 의존성 추가
+
+```java
+@SpringBootTest
+@RunWith(SpringRunner.class)
+@AutoConfigureMockMvc
+public class AccountControllerTest {
+
+    @Autowired
+    MockMvc mockMvc;
+```
+
+`@AutoConfigureMockMvc` 를 선언하면, `MockMvc`를 주입받아서 사용할 수 있다. 
+
+```java
+	@WithMockUser(username = "andrewMock", password="123", roles = "USER")
+    public void index_mockUser() throws Exception {
+        mockMvc.perform(get("/"))
+                .andDo(print())
+                .andExpect(status().isOk());
+    }
+```
+
+`@WithMockUser`를 통해서 가짜 객체를 만들어서, 가짜 User가 있는 상태라면(실제 DB에 있는 데이터가 아니다) 어떻게 응답을 보여주는지 확인할 수 있다. 
+
+
+
+### FormLogin 테스트
+
+```java
+	@Test
+    @Transactional
+    public void form_login_success_test() throws Exception {
+        Account account = createAccount();
+        mockMvc.perform(formLogin().user(account.getUsername()).password("123"))
+                .andExpect(authenticated());
+    }
+
+	private Account createAccount() {
+        Account account = new Account();
+        account.setUsername("andrew");
+        account.setPassword("123");
+        account.setRole("USER");
+
+        return accountService.createAccount(account);
+    }
+```
+
+`formLogin()`를 통해서 실제 user, password 정보를 넣는다. 중요한 것은 기존의 accountService의 createAccount()메서드를 통해서 Account객체를 저장할때 Password를 Bcrypt Encorder를 통해서 인코딩 했기 때문에 결과값을 비교할 때, 저렇게 하드코딩으로 "123" 값을 넣어서 비교했다.
+
+
+
+
+
+
+
+
+
+
+
+## 2. Spring Security 아키텍쳐
+
+
+
+![](https://user-images.githubusercontent.com/28615416/64468077-fb9ad180-d15a-11e9-85b3-549cc37a6e65.png)
+
+빨간색 부분만 살펴보면SecurityContextHolder안에 SecurityContext가 있고, 그 안에 Authentication 객체가 있다. Authentication 객체는 Principal과 GrantAuthority정보가 있다. SecurityContextHolder는 SecurityContext를 제공해주는 놈이고, ThreadLocal이다. 이 말인 즉슨, 인증이된 사용자는 같은 쓰레드내에서 죽기 전까지는 인증됨을 유지한다. 
+
+
+
+Authentication의 Principal이라는 객체는 이전 코드에서 UserDetailsService 인터페이스를 구현했을 당시에, 리턴문에서 Spring Security가 제공하는 User클래스를 만들어서 리턴했던 정보가 바로 Principal (신원정보) 이다. 
+
+```java
+	@Override
+    public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
+        Account account = accountRepository.findByUsername(username);
+        if(account == null){
+            throw new UsernameNotFoundException(username);
+        }
+        return User.builder()
+                .username(account.getUsername())
+                .password(account.getPassword())
+                .roles(account.getRole())
+                .build();
+    }
+```
 
