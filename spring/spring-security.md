@@ -298,30 +298,45 @@ public class AccountControllerTest {
 
 ![](https://user-images.githubusercontent.com/28615416/64468077-fb9ad180-d15a-11e9-85b3-549cc37a6e65.png)
 
-빨간색 부분만 살펴보면SecurityContextHolder안에 SecurityContext가 있고, 그 안에 Authentication 객체가 있다. Authentication 객체는 Principal과 GrantAuthority정보가 있다. SecurityContextHolder는 SecurityContext를 제공해주는 놈이고, ThreadLocal이다. 이 말인 즉슨, 인증이된 사용자는 같은 쓰레드내에서 죽기 전까지는 인증됨을 유지한다. 
+빨간색 부분만 살펴보면SecurityContextHolder안에 SecurityContext가 있고, 그 안에 Authentication 객체가 있다. Authentication 객체는 Principal과 GrantAuthority정보가 있다. SecurityContextHolder는 SecurityContext를 제공해주는 놈이고, ThreadLocal이다. 이 말인 즉슨, 인증이된 사용자는 같은 쓰레드 내에서 죽기 전까지는 인증됨을 유지한다. 
 
 
 
-지금 구현되어있는 시큐리티(basic Form login)인 경우,Authentication 객체 타입은 `UsernamePasswordToken` 타입의 객체를 리턴하는 것을 알 수 있다. 이는 나중에 다른 token으로 변경할 수 있음을 나타낸다.  
+```java
+// SecurityContextHolder에서 context를 가져오고, Authentication를 가져온다.
+Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
 
-![](https://user-images.githubusercontent.com/28615416/64468193-829c7980-d15c-11e9-992b-b4d9600af88a.png)
+// UserDetailsSerivce 인터페이스를 구현한 Principal정보를 가져온다. 
+User principal = (User) authentication.getPrincipal();
+
+// Principal에서 User의 Role정보를 가져온다
+Collection<? extends GrantedAuthority> authorities = authentication.getAuthorities();
+```
+
+
+
+
+
+지금 구현되어있는 시큐리티(basic Form login)인 경우 Authentication 객체 타입은 `UsernamePasswordToken` 타입의 객체를 리턴하는 것을 알 수 있다. 이는 나중에 다른 token으로 변경할 수 있음을 나타낸다.  
+
+![authentication](https://user-images.githubusercontent.com/28615416/64468293-eecbad00-d15d-11e9-9054-d6450ef9b2f6.png)
 
 
 
 Authentication의 Principal이라는 객체는 이전 코드에서 UserDetailsService 인터페이스를 구현했을 당시에, 리턴문에서 Spring Security가 제공하는 User클래스를 만들어서 리턴했던 정보가 바로 Principal (신원정보) 이다. 
 
 ```java
-	@Override
-    public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-        Account account = accountRepository.findByUsername(username);
-        if(account == null){
-            throw new UsernameNotFoundException(username);
-        }
-        return User.builder()
-                .username(account.getUsername())
-                .password(account.getPassword())
-                .roles(account.getRole())
-                .build();
+@Override
+public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
+    Account account = accountRepository.findByUsername(username);
+    if(account == null){
+        throw new UsernameNotFoundException(username);
     }
+    return User.builder()
+        .username(account.getUsername())
+        .password(account.getPassword())
+        .roles(account.getRole())
+        .build();
+}
 ```
 
