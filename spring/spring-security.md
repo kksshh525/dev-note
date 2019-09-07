@@ -296,7 +296,20 @@ public class AccountControllerTest {
 
 ## 2. Spring Security 아키텍쳐
 
+https://spring.io/guides/topicals/spring-security-architecture
 
+https://docs.spring.io/spring-security/site/docs/5.1.5.RELEASE/reference/htmlsingle/#overall-architecture
+
+
+
+스프링 시큐리티를 들어가기에 앞서 중요한 개념 2가지 
+
+-   인증(Authentication): 인증은 사용자가 입력한 id/password가 일치하는지를 판별해서 인증이 된 사용자 인지 판별
+-   인가(Authorize): 인증을 거치고 나서, 자원에 접근할 때 ROLE 권한을 설정한다. 해당 사용자가 어떤 ROLE 권한을 갖고 있는지 부여하는 것을 인가라 한다. 
+
+
+
+### SecurityContextHolder와 Authentication
 
 ![](https://user-images.githubusercontent.com/28615416/64468077-fb9ad180-d15a-11e9-85b3-549cc37a6e65.png)
 
@@ -401,8 +414,6 @@ public class AccountService implements UserDetailsService {
 
 
 
-
-
 1.  인증을 하고 나서 SecurityContextHolder(ThreadLocal)에 들고 있는건 OK, 그걸 넣어주는 부분은 어디 ?
     -   UserNamePasswordAuthenticationFilter
         -   폼인증 처리하는 시큐리티 필터
@@ -434,8 +445,8 @@ public class AccountService implements UserDetailsService {
     11.  SecurityContextHolderAwareReqeustFilter
     12.  AnonymouseAuthenticationFilter
     13.  SessionManagementFilter
-    14.  ExeptionTranslationFilter
-    15.  FilterSecurityInterceptor
+    14.  **ExeptionTranslationFilter**
+    15.  **FilterSecurityInterceptor**
 
 
 
@@ -459,3 +470,61 @@ AccessDecisionVoter를 가져와서 vote()메서드를 호출한다.
 
 result값에 따라서 자원 접근에 대한 판단을 한다. 
 
+
+
+### AccessDecisionManger 2부
+
+>   문제상황: ROLE_ADMIN > ROLE_USER 계층구조를 가져야 하는데, 지금 현재는 ADMIN 권한만을 갖은 사용자는 USER권한이 있는 페이지에 접근을 못한다. 
+
+2가지 방법 존재 
+
+1.  ROLE_ADMIN, ROLE_USER 등 여러개의 ROLE들로 관리 하는 것 
+2.  **ROLE간의 계층구조를 선언한다. (`WebSecurityExpressionHandler`를 이용)**
+
+`SecurityConfig` 파일에 expressionHandler를 만든다. 만든 핸들러를 등록한다.
+
+```java
+public DefaultWebSecurityExpressionHandler expressionHandler(){
+        RoleHierarchyImpl roleHierarchy = new RoleHierarchyImpl();
+        roleHierarchy.setHierarchy("ROLE_ADMIN > ROLE_USER");
+
+        DefaultWebSecurityExpressionHandler handler = new DefaultWebSecurityExpressionHandler();
+        handler.setRoleHierarchy(roleHierarchy);
+
+        return handler;
+}
+```
+
+이제는 ADMIN권한을 갖은 사용자는 USER권한이 있는 자원에도 접근할 수 있게 됨
+
+
+
+### FilterSecurityInterceptor
+
+AccessDecisionManager를 사용하여 Access Control 또는 예외 처리 하는 필터 
+
+
+
+### ExceptionTranslationFilter
+
+FilterChainProxy에서 발생하는 `AuthenticationException` 과 `AccessDeniedException` 를 처리하는 필터
+
+
+
+AuthenticationException 발생시
+
+-   AuthenticationEntryPoint 실행
+-   AbstractSecurityInterceptor 하위 클래스(ex, FilterSecurityInterceptor) 에서만 발생하는 예외 처리
+
+
+
+AccessDeniedException 발생시
+
+-   익명 사용자라면 AuthenticationException 발생
+-   익명 사용자가 아니라면 AccessDeniedHandler에게 위임
+
+
+
+
+
+## 3. 웹 애플리케이션 시큐리티
