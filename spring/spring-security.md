@@ -342,3 +342,120 @@ public UserDetails loadUserByUsername(String username) throws UsernameNotFoundEx
 }
 ```
 
+
+
+
+
+### AuthenticationManager 와 Athentication
+
+SecurityContextHolder(Thread Local)는 인증 정보를 들고 있다. 실제 인증 처리는 AuthenticationManager가 담당한다. 
+
+AuthenticationManager인터페이스는 다음과 같다. 
+
+```java
+public interface AuthenticationManager {
+	Authentication authenticate(Authentication authentication) throws AuthenticationException;
+}
+```
+
+**인자로 받은 Authentication:** 위의 메서드의 파라미터 인자로 Authentication는 폼 인증인 경우에 아이디 / 비밀번호가 각각 Principal과 Credential의 값들로 들어간다. 
+
+![](https://user-images.githubusercontent.com/28615416/64474848-8a3c3c80-d1b5-11e9-9b45-24239d62baa8.png)
+
+
+
+**인증처리**: 사용자가 입력한 password(위에서 `authentication()` 메서드의 인자로 넘어온 credentials)와 우리가 구현한 UserDetailsService에서 읽어들인 UserDetails 객체에 들어있는 password와 일치하는 지 확인한다.
+
+```java
+@Service
+public class AccountService implements UserDetailsService {
+
+    @Autowired
+    private AccountRepository accountRepository;
+
+    @Override
+    public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
+        Account account = accountRepository.findByUsername(username);
+        if(account == null){
+            throw new UsernameNotFoundException(username);
+        }
+        return User.builder()
+                .username(account.getUsername())
+                .password(account.getPassword())
+                .roles(account.getRole())
+                .build();
+    }
+```
+
+
+
+**Authentication 객체 리턴:** ProviderManager의 다음 코드를 실행하게 되면 인증을 통해서 result 객체에 담기게 된다. 
+
+![](https://user-images.githubusercontent.com/28615416/64474950-d3d95700-d1b6-11e9-9e25-3e78cbd127f9.png)
+
+리턴하는 Authentication은 Principal에는 UserDetailsService에서 오버라이딩한 User객체가 담겨있고, Crendential에는 여전히 비밀번호가 담겨있다. 
+
+![](https://user-images.githubusercontent.com/28615416/64474951-d3d95700-d1b6-11e9-9de9-e208a0c22a58.png)
+
+
+
+
+
+
+
+1.  인증을 하고 나서 SecurityContextHolder(ThreadLocal)에 들고 있는건 OK, 그걸 넣어주는 부분은 어디 ?
+    -   UserNamePasswordAuthenticationFilter
+        -   폼인증 처리하는 시큐리티 필터
+        -   인증된 Authentication객체를 SecurityContextHolder에 넣어줌
+        -   SecurityContextHolder.getContext().setAuthentication(authentication) 
+2.  한 번 인증을 완료한 사용자는 그 다음 또 재차 인증을 하지 않고, 이미 인증했다라는 정보는 어디에? 
+    -   SecurityContextPersistanceFilter
+        -   SecurityContext를 HTTP 세션에 저장해서, 다음 번 요청시에 세션을 통해서 Authentication을 가져온다. 
+
+
+
+### FilterChainProxy 와 DelegatingFilterProxy
+
+![](http://www.einnovator.org/store/docs/refcard/quickguide-12-spring-security/spring-security-filter-chain.png)
+
+-   브라우저의 요청을 통해서 `DelegatingFilterProxy`를 통해서 `FilterChainProxy`를 호출한다. 
+    -   스프링 부트에서는 `SecurityFilterAutoConfiguration` 설정 정보를 통해서 자동으로 DelegatingFilterProxy가 등록된다. 
+-   FilterChainProxy는 다양한 필터들이 존재한다.
+    1.  WebAsyncManagerIntergrationFilter
+    2.  **SecurityContextPersistenceFilter**
+    3.  HeaderWriterFilter
+    4.  CsrfFilter
+    5.  LogoutFilter
+    6.  **UsernamePasswordAuthenticationFilter**
+    7.  DefaultLoginPageGeneratingFilter
+    8.  DefaultLogoutPageGeneratingFilter
+    9.  BasicAuthenticationFilter
+    10.  RequestCacheAwareFtiler
+    11.  SecurityContextHolderAwareReqeustFilter
+    12.  AnonymouseAuthenticationFilter
+    13.  SessionManagementFilter
+    14.  ExeptionTranslationFilter
+    15.  FilterSecurityInterceptor
+
+
+
+### AccessDecisionManger
+
+>    그 동안에는 인증에 대한 인터페이스였고, 이번에는 인가에 대한 인터페이스를 다룬다.
+
+-   AffirmativeBased: 여러 Voter중 한 명이라도 허용하면 허용. 기본전략 
+-   ConsensusBased: 다수결
+-   UnanimouseBased: 만장일치 
+
+![](https://user-images.githubusercontent.com/28615416/64475704-1738c300-d1c1-11e9-85a7-76750c00b3ec.png)
+
+AccessDecisionVoter를 가져와서 vote()메서드를 호출한다. 
+
+```java
+	int ACCESS_GRANTED = 1; // 허용
+	int ACCESS_ABSTAIN = 0; // 보류
+	int ACCESS_DENIED = -1; // 거절
+```
+
+result값에 따라서 자원 접근에 대한 판단을 한다. 
+
