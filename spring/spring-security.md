@@ -93,7 +93,7 @@ WebSecurityConfigurereAdapter를 상속받아 인자가 http인 configure 메서
 
 `localhost:8080/dashboard`  를 호출하게 되면 다음과 같이 Spring Security가 제공해 주는 기본 로그인폼이 나온다.
 
-<img src="https://user-images.githubusercontent.com/28615416/64464842-7d333500-d144-11e9-8bd6-ffdfc3bf6a39.png" style="zoom:50%;" />
+<img src="https://user-images.githubusercontent.com/28615416/64464842-7d333500-d144-11e9-8bd6-ffdfc3bf6a39.png" style="zoom:40%;" />
 
 기본 default Username은 `user` 이고  패스워드는 위에 콘솔에 출력된 결과물이다. 
 
