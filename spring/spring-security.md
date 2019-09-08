@@ -528,3 +528,53 @@ AccessDeniedException 발생시
 
 
 ## 3. 웹 애플리케이션 시큐리티
+
+### ignore()
+
+>   현재 애플리케이션을 띄우면 요청 외에 favicoin.ico 요청을 보내고, 이는 Spring Security의 Filter들을 거쳐서 그만큼 시간을 낭비하게 된다. 
+
+```java
+	@Override
+    public void configure(WebSecurity web) throws Exception {
+        web.ignoring().mvcMatchers("/favicon.ico");
+    }
+```
+
+securityConfig에서 메서드 타입이 WebSecurity를 메서드를 오버라이딩해서 정적 자원들을 무시해주면 된다. 단점은 매번 그렇게 하드 코딩해야 한다. 그렇기 때문에 스프링 부트에서 정적 자원들에 대한 경로를 제공함. 
+
+```java
+    @Override
+    public void configure(WebSecurity web) throws Exception {    			web.ignoring().requestMatchers(PathRequest.toStaticResources().atCommonLocations());
+    }
+```
+
+그렇다면 스프링 부트에서 제공하는 정적 자원들은 어떤게 있을까? 
+
+<img width="461" alt="스크린샷 2019-09-08 오전 10 17 24" src="https://user-images.githubusercontent.com/28615416/64481924-0b311d80-d222-11e9-8c6c-434a930c0295.png">
+
+enum 형태로 다음과 같은 경로들을 제외한다. 
+
+>   그렇다면 해당 정적 자원들에 대한 ignore를 `configure(HttpSecurity http)` 메서드에서 처리해도 되지 않나? 
+>   물론 가능 하지만, 기존의 FilterChainProxy의  favicon 요청에도 모든 필터를 전부 탄다. 그 만큼 시간이 낭비된다. 
+
+
+
+### WebAsyncMangerIntegrationFilter
+
+스프링 MVC의 async 기능(핸들러에서 Callable을 리턴할 수 있는 기능)을 사용할 때, SecurityContextHolder를 공유할 수 있게 도와주는 필터. Async 기능을 사용하면 다른 쓰레드에서 동작한다. 같은 쓰레드 내에서 인증된 사용자 정보를 공유하는 SecurityContextHolder를 지원한다. 
+
+
+
+### 시큐리티와 @Async 
+
+@Async를 사용하면, 다른 쓰레드를 생성해서 비동기로 처리하기 때문에 ThreadLocal의 ContenxtSecurityHolder를 사용하지 못한다. `SecurityContextHolder.MODE_INHERITABLETHREADLOCAL` 전략을 추가한다.
+
+```java
+    @Override
+    protected void configure(HttpSecurity http) throws Exception {
+	// ...생략
+    SecurityContextHolder.setStrategyName(SecurityContextHolder.MODE_INHERITABLETHREADLOCAL);
+    }
+
+```
+
