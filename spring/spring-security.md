@@ -578,3 +578,45 @@ enum 형태로 다음과 같은 경로들을 제외한다.
 
 ```
 
+
+
+### SecurityContextPersistenceFilter
+
+SecurityContextRepository인터페이스 (기본 구현체는 HttpSessionSecurityContextRepository)를 통해서 인증이된 사용자 정보를 SecurityContext에서 읽어오거나 초기화를 담당한다. 그래서 15개의 필터에서 앞단에 위치한다. 
+
+
+
+
+
+### HeaderWriterFilter
+
+응답헤더에 시큐리티 관련 헤더를 추가하는 필터 
+
+
+
+### CsrfFilter
+
+>   CSRF 공격: 공격자가 의도한 행동을 해서 특정 웹페이지를 보안에 취약하게 한다거나, 수정, 삭제등의 작업을 통해서 공격하는 것. 예를 들어 은행뱅킹업무를 볼려고 로그인을 했고 크롬 탭(다른 사이트)에서 어떤 항목을 클릭했을때 공격자가 미리 심어둔 의도한 행동을 수행하게끔 하는 공격
+
+>    CORS: 타 도메인을 열어주는 것. 예를 들어 공공API 인 경우에 타 도메인에 대한 자원 접근을 허용해줘야한다. 기본적으로는 브라우저가 CORS 정책이 적용이 되서 다른 도메인에서 접근하는 것을 막아준다.
+
+CsrfFilter는 CSRF 공격을 방어해준다. 
+
+어떤 방식으로?  서버단에서 CSRF 토큰을 만들어 준다. 클라이언트가 Form의 CSRF토큰을 hidden 필드에 숨겨서 보낸다. 서버가 만들어준 CSRF토큰과 클라이언트가 보낸 CSRF토큰이 일치하는 지를 판별한다. 
+
+![](https://user-images.githubusercontent.com/28615416/64527057-ecc14400-d33f-11e9-9305-d29dd596b630.png)
+
+
+
+
+
+![](https://user-images.githubusercontent.com/28615416/64527270-707b3080-d340-11e9-81ca-fe27567f609b.png)
+
+
+
+만약에 csrf 필터를 사용하고 싶지 않다면 다음과 같이 disable()시킨다. FilterChainProxy를 살펴 보면 CsrfFilter가 빠진 것을 확인할 수 있다. 
+
+```java
+http.csrf().disable();
+```
+
