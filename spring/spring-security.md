@@ -620,3 +620,37 @@ CsrfFilter는 CSRF 공격을 방어해준다.
 http.csrf().disable();
 ```
 
+
+
+### LogoutFilter
+
+여러개의 LogoutHandler(Composite 객체로 되어 있음)를 이용해 로그아웃 처리를 하고, 이후 LogoutSuccessHandler를 통해서 로그아웃 후처리를 한다. 
+
+-   LogoutHandler
+    -   CsrfLogoutHandler
+    -   SecurityContextLogoutHandler
+-   LogoutSuccessHandler
+    -   SimplUrlLogoutSuccessHandler
+
+현재는 `/logout` 를 통해서 로그아웃을 하게되면 `/login` 페이지로 이동한다. 이 SuccessUrl을 변경하고 싶으면 
+
+```java
+http.logout()
+        .logoutUrl("/logout")
+        .logoutSuccessUrl("/") // 이 부분을 변경하면 된다. 
+
+```
+
+
+
+### UsernamePasswordAuthenticationFilter
+
+-   폼에서 받은 username, password 정보를 바탕으로 UsernamePasswordAuthenticationToken을 만든다. 
+-   authenticationManger를 통해서 `authenticate()`를 호출한다. 
+
+![](https://user-images.githubusercontent.com/28615416/64575457-ef0eb700-d3ae-11e9-857d-9d84025935b5.png)
+
+
+
+-   AuthenticationManger 구현체인 ProviderManager에서 여러개의 AuthenticationProvider List가 존재하고, 이중에서 DaoAuthenticationProvider를 사용한다. 
+-   DaoAuthenticationProvider는 우리가 구현했던 UserDetailsService에서 loadUserByUsername을 통해서 DB에서 가져온 User정보와 일치하는지 판별한다.
