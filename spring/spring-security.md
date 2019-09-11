@@ -4,6 +4,12 @@
 > 인프런 Spring Security 강의 요약 내용
 >
 > 소스코드 https://github.com/umanking/spring-security-example 
+>
+> 학습목표
+>
+> 1.  Spring Security 인증, 인가 하는 아키텍쳐를 이해한다.
+> 2.  Spring Security가 제공하는 폼인증 설정, 구현 한다. 
+> 3.  FilterChainProxy의 15개 Filter가 하는 역할을 이해한다. 
 
 
 
@@ -704,3 +710,57 @@ Http Basic 인증이란?
 SecurityContext에 Authentication 정보가 null이면 `익명 Authentication` 을 만들어 넣어주고(null object 패턴) 그게 아니면 아무런 일도 하지 않는다. 
 
 직접 `익명 Authentication` 를 커스텀할 수 있다. 
+
+
+
+
+
+### SessionMangementFilter
+
+-   세션 변조 방지 전략 설정: sessionFixation
+
+-   유효하지 않은 세션 리다이렉트 : invalidSessionUrl
+-   동시성 제어: maximumSessions
+-   세션 생성 전략: sessionCreationPolicy
+
+
+
+### ExceptionTranslationFilter 
+
+인증, 인가 에러 처리르 담당하는 필터
+
+-   AuthenticationEntryPoint
+-   AccessDeniedHandler
+
+```java
+// 1. accessDeniedHandler 직접 구현
+http.exceptionHandling().accessDeniedHandler(... 구현...);
+
+// 2. accessDeniedPage 설정 
+http.exceptionHandling().accessDeniedPage("/access-denied");
+```
+
+
+
+### RememberMeAuthenticationFilter
+
+세션이 사라지거나 만료 되더라도 쿠키또는 DB를 사용하여 저장된 토큰을 기반으로 인증을 지원함
+
+```java
+http.rememberMe()
+    .key("remember-me-sample")
+    .userDetailsService(accountService);
+```
+
+
+
+
+
+로그인 폼에서 remember-me를 체크하고 로그인을하게되, remember-me 라는 토큰이 추가적으로 생기고, 기존의 JSESSIONID를 삭제해도 여전히 remember-me 토큰 때문에 세션을 유지한다.
+
+![스크린샷 2019-09-11 오전 11 46 16](https://user-images.githubusercontent.com/28615416/64664380-f8208680-d489-11e9-9320-daf0c236673e.png)
+
+![스크린샷 2019-09-11 오전 11 45 59](https://user-images.githubusercontent.com/28615416/64664381-f8208680-d489-11e9-8f0e-1b554362aaea.png)
+
+
+
