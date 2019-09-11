@@ -764,3 +764,35 @@ http.rememberMe()
 
 
 
+
+
+### 커스텀 필터 추가 
+
+-   GenericFilterBean을 상속받아서 구현 
+
+-   SecurityConfig 에 필터를 추가(어느 위치에 추가할 것인지? )
+
+-   ex) 로깅 필터
+
+    ```java
+    public class LoggingFilter extends GenericFilterBean {
+    
+        private Logger logger = LoggerFactory.getLogger(this.getClass());
+    
+        @Override
+        public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain) throws IOException, ServletException {
+            StopWatch stopWatch = new StopWatch();
+            stopWatch.start(((HttpServletRequest)request).getRequestURI());
+            chain.doFilter(request, response);
+            stopWatch.stop();
+            logger.info(stopWatch.prettyPrint());
+        }
+    }
+    
+    ```
+
+    ```java
+    http.addFilterAfter(new LoggingFilter(), UsernamePasswordAuthenticationFilter.class);
+    ```
+
+    
