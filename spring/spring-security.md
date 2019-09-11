@@ -604,6 +604,8 @@ CsrfFilter는 CSRF 공격을 방어해준다.
 
 어떤 방식으로?  서버단에서 CSRF 토큰을 만들어 준다. 클라이언트가 Form의 CSRF토큰을 hidden 필드에 숨겨서 보낸다. 서버가 만들어준 CSRF토큰과 클라이언트가 보낸 CSRF토큰이 일치하는 지를 판별한다. 
 
+>   Thymleaf 2.1 버전 이상일때, 폼 정보에 CSRF hidde 필드에 숨겨서 보낸다.
+
 ![](https://user-images.githubusercontent.com/28615416/64527057-ecc14400-d33f-11e9-9305-d29dd596b630.png)
 
 
@@ -654,3 +656,32 @@ http.logout()
 
 -   AuthenticationManger 구현체인 ProviderManager에서 여러개의 AuthenticationProvider List가 존재하고, 이중에서 DaoAuthenticationProvider를 사용한다. 
 -   DaoAuthenticationProvider는 우리가 구현했던 UserDetailsService에서 loadUserByUsername을 통해서 DB에서 가져온 User정보와 일치하는지 판별한다.
+
+### DefaultLoginGenratingFilter 
+
+-   기본 로그인 폼 페이지를 생성해주는 필터. 
+-   `GET /login` 요청을 처리하는 필터 
+
+폼의 각 파라미터 속성을 커스텀하게 변경할 수 있다.
+
+```java
+http.formLogin()
+    .usernameParameter("custom-username")
+    .passwordParameter("custom-password")
+```
+
+내가 원하는 로그인 페이지로 변경할 수 있다. 이 경우에, `DefaultLoginGeneratingFilter`  `DefaultLogoutGeneratingFilter` 를 타지 않는다. 
+
+```java
+http.formLogin()
+    .loginPage("/custom-login")
+```
+
+
+
+### BasicAuthenticationFilter
+
+Http Basic 인증이란? 
+
+-   요청 헤더에 username password를 base64 인코딩한 값을 보내서 브라우저 또는 서버가 값을 읽어서 인증하는 방식
+-   보안에 매우 취약함
