@@ -684,4 +684,23 @@ http.formLogin()
 Http Basic 인증이란? 
 
 -   요청 헤더에 username password를 base64 인코딩한 값을 보내서 브라우저 또는 서버가 값을 읽어서 인증하는 방식
--   보안에 매우 취약함
+-   보안에 매우 취약함 HTTPS 사용할 것을 권장함
+
+
+
+### RequestCacheAwareFilter
+
+-   캐시된 요청이 있다면, 해당 캐쉬된 요청을 처리 
+-   캐시된 요청이 없다면, 새로운 요청을 처리 한다
+
+예를 들면 `/dashboard`라는 요청을 보냈는데 인증정보가 필요하니까 `/login` 로그인 페이지로 보내버린다. 이때, 로그인이 성공하면 이전에 요청했던 `/dashboard`는 이미 캐시된 요청이므로, 로그인 후 보여지는 페이지는 `dashboard`페이지가 보인다. 
+
+
+
+
+
+### AnonymousAuthenticationFilter
+
+SecurityContext에 Authentication 정보가 null이면 `익명 Authentication` 을 만들어 넣어주고(null object 패턴) 그게 아니면 아무런 일도 하지 않는다. 
+
+직접 `익명 Authentication` 를 커스텀할 수 있다. 
