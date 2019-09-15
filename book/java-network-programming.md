@@ -125,9 +125,74 @@ java.util.concurrent 안에 있는 **Executors 클래스를 사용하면 스레�
 
 
 
+## 4. 인터넷 주소
+
+인터넷에 연결된 장치를 '**노드**'라고 부른다. 노드가 컴퓨터인 경우 해당 노드를 **호스트**라고 부른다. 각 노드나 호스트는 인터넷 주소 또는 IP주소라고 불리는 최소 하나의 고유한 숫자에 의해 식별된다. 
+
+인터넷을 만든 사람들은 전체 IP주소가 적힌 전화번호부 같은 책자를 들고 다니는 일을 피하기 위해 DNS을 개발했다. DNS는 사람들이 쉽게 기억할 수 있는 google.com과 같은 호스트네임을 컴퓨터가 쉽게 기억할 수 있는 ip주소와 연결한다. 
 
 
 
+### InetAddress클래스
+
+java.net.InetAddrss클래스는 IPv4, IPv6 주소에 대한 자바의 고수준 표현 방식이다. 이 클래스는 Socket, ServerSocket, URL, DatagramSocket, DatagramPacket등을 포함한 대부분의 다른 네트워킹 클래스에 의해 사용된다. InetAddress 클래스는 보통 호스트네임과 IP주소를 모두를 포함하고 있다. 
+
+### InetAddress 객체 생성하기
+
+
+
+#### 캐시
+
+DNS검색(lookup)은 최종 쿼리 서버에 도착하기 까지 여러 중간 단계의 서버를 거쳐야 하고 종종 중간에 손실되는 경우도 있기 때문에 상대적으로 비용이 많이 드는 명령에 해당한다. 그래서 InetAddress 클래스는 검색의 결과를 저장(cache)한다. 
+
+#### IP주소로 검색하기 
+
+호스트네임을 사용하는 것이 IP를 직접 사용하는 것보다 좀 더 안정적이다. 
+
+#### 보안 이슈 
+
+호스트 네임으로부터 새로운 InetAddress 객체를 생성하는 일은 DNS검색을 필요로 하기 때문에 잠재적인 보안 문제에 노출되어 있다. 
+
+
+
+### Get메서드 
+
+InetAddress 클래스는 호스트네임을 문자열로 반환하고 IP주소를 문자열과 바이트 배열로 반환하는 네 개의 Get메서드를 제공한다. 
+
+```java
+public String getHostName()
+public String getCanonicalHostName()
+public byte[] getAddress()
+public String getHostAddress()
+```
+
+
+
+```java
+public class OreillyByName {
+    public static void main(String[] args){
+        InetAddress inetAddress = null;
+        try {
+            inetAddress = InetAddress.getByName("www.oreilly.com");
+
+            System.out.println("hostAddress : " +inetAddress.getHostAddress());
+            System.out.println("canonicalHostName : "+ inetAddress.getCanonicalHostName());
+            System.out.println("hostName: "+ inetAddress.getHostName());
+            System.out.println("address : "+ Arrays.toString(inetAddress.getAddress()));
+            
+        } catch (UnknownHostException e) {
+            System.out.println(e.getMessage());
+        }
+    }
+}
+```
+
+```
+hostAddress : 23.76.90.240
+canonicalHostName : a23-76-90-240.deploy.static.akamaitechnologies.com
+hostName: www.oreilly.com
+address : [23, 76, 90, -16]
+```
 
 
 
