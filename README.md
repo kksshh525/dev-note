@@ -2,12 +2,13 @@
 
 
 
-## 0. Setup 
+## Setup 
 
 -   [개발환경 셋팅](./mac/setup.md)
--   
 
-## 1. 강의
+
+
+## 강의
 
 #### 인프런
 
@@ -17,7 +18,7 @@
 
 
 
-## 2. 책 
+## 책 
 
 -   [그림으로 배우는 Httpnetwork](./web/http-network-basic.md)
 -   [이펙티브 자바 3/E](./book/effective-java.md)
@@ -32,6 +33,15 @@
 
 
 
-## 3. Interview
+## Interview
 
 -   [백엔드개발자 질문 모음](./interview/interview.md)
+
+
+
+## Intellij 
+
+-   [단축키 모음](https://medium.com/@umanking/%EC%9D%B8%ED%85%94%EB%A6%ACj-%EC%82%AC%EC%9A%A9%EB%B2%95-a44543666893)
+-   [File and Code Templates](./intellij/file-and-codetemplate.md)
+
+#### 
