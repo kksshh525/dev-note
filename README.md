@@ -2,6 +2,10 @@
 
 
 
+-   [daily study](dailyStudy.md)
+
+
+
 ## Setup 
 
 -   [개발환경 셋팅](./mac/setup.md)
