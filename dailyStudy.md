@@ -1,4 +1,4 @@
-1/26
+## 1/26
 
 https://docs.spring.io/spring/docs/4.2.x/spring-framework-reference/html/transaction.html
 
@@ -41,12 +41,25 @@ https://docs.spring.io/spring/docs/current/spring-framework-reference/web.html#f
 
 
 
+https://docs.spring.io/spring/docs/current/spring-framework-reference/web.html#mvc-controller
+
+
+
+-   1.3 Annotated Controllers
+    -   URI variables는 자동으로 type conversion 된다. (int, Long, Date)  (DataBinder, Type Conversion)
+    -   conent-type이란게 request, response 도있다.
+        -   요청에 대해서 좁힘 Content-Type - consumes
+        -   요청에 대해서 좁힘 Accept - produces
 
 
 
 
-More study about
+
+## More study about...
 
 -   http schema
 -   MD5 hash
 -   WebRequest vs HttpServletRequest랑뭐가 다르나?
+-   RED Attatck
+-   XSS Attack
+-   http Content-Disposition Header
