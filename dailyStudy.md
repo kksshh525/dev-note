@@ -69,7 +69,7 @@ https://docs.spring.io/spring/docs/current/spring-framework-reference/web.html#m
 
 
 
-1/27 
+## 1/27 
 
 -   DataBinder 
     -   @Controller @ControllerAdvice는 @InitBinder 메서드를 가지고 있고, 얘는 WebDataBinder 인스턴스를 Initializing 한다.
@@ -87,6 +87,17 @@ CORS
 
 
 
+RestTemplate vs WebClient
+
+-   두개다 client-side REST 엔드포인트에 접근하는 방법이다.
+-   RestTemplate 동기, blocking
+-   WebClient  비동기, non-blocking
+-   더이상 RestTemplate 개발안한다. 나중에 WebClient로 대체될 것이다. 그렇다고 모든 소스코드를 코칠 필요는 없다. compatiable하기 때문에
+
+>   https://www.youtube.com/watch?time_continue=13&v=zXBTTOQ_iSQ&feature=emb_logo
+
+
+
 
 
 
@@ -99,3 +110,4 @@ CORS
 -   RED Attatck
 -   XSS Attack
 -   http Content-Disposition Header
+-   netty
