@@ -69,6 +69,22 @@ https://docs.spring.io/spring/docs/current/spring-framework-reference/web.html#m
 
 
 
+1/27 
+
+-   DataBinder 
+    -   @Controller @ControllerAdvice는 @InitBinder 메서드를 가지고 있고, 얘는 WebDataBinder 인스턴스를 Initializing 한다.
+
+
+
+CORS
+
+-   SpringMVC의 HandlerMapping 구현체가 CORS 를 위한 built-in support를 제공한다. 
+-   Configuration을 통해서 설정하고, URL Pattern에 맞춰서 CORS 요청 헤더에 정보를 넣고, response 헤더에 정보를 담아서 반환한다. 
+-   preflight 느낌으로 사전에 URL 패턴 매칭을 통해서 판단한다. 
+
+-   Spring Security에서 CORSFilter를 사용할 수도 있고, SpringMVC에서 제공하는 CORS Support 를 그대로 사용할 수 있다. Security에서 제공하는 CorsFilter를 사용하면, Security를 타기전에 먼저 CORS 프로세싱이 진행된다. 왜? pre-flight request 에는 쿠키들을 포함하지 않기 때문에 해당 유저가 승인된 유저인지 아닌지를 먼저 판단해서 거절할지를 결정한다. 
+    https://docs.spring.io/spring-security/site/docs/current/reference/htmlsingle/#cors
+
 
 
 
