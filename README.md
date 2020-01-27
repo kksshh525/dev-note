@@ -2,7 +2,9 @@
 
 
 
--   [daily study](dailyStudy.md)
+
+
+-   [Study 2020년 1월](study-202001)
 
 
 
