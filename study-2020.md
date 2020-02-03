@@ -55,17 +55,16 @@ https://docs.spring.io/spring/docs/current/spring-framework-reference/web.html#m
 
 
 
-![](http://image.yes24.com/Goods/78226025/800x0)
+-   나는 라인 개발자 입니다- 책리뷰
+    -   **<u>라인은 문서화</u>**가 굉장히 잘 되어있고, 실수를 했을 때 누군가를 탓하기 보다는 그 문제에 대한 원인과 현상 대책을 뚜렷하게 마련함으로써 계속해서 문서화를 만들어 간다. 이는 곧 회사의 자산이다. 
 
--   **<u>라인은 문서화</u>**가 굉장히 잘 되어있고, 실수를 했을 때 누군가를 탓하기 보다는 그 문제에 대한 원인과 현상 대책을 뚜렷하게 마련함으로써 계속해서 문서화를 만들어 간다. 이는 곧 회사의 자산이다. 
+    -   다양한 경험들을 거친 사람들이 있다. 모두가 그런것은 아닐테지만, 정말 찐 개발자부터 오픈소스매니저, 테크 에반젤리스트 등 다양한 경험을 한 사람들을 다양한 방향으로 뻗어나갈 수 있게 서포트를 한다는 것을 느꼈다. **<u>하고 싶은거 다 해봐!</u>**(자율성)
 
--   다양한 경험들을 거친 사람들이 있다. 모두가 그런것은 아닐테지만, 정말 찐 개발자부터 오픈소스매니저, 테크 에반젤리스트 등 다양한 경험을 한 사람들을 다양한 방향으로 뻗어나갈 수 있게 서포트를 한다는 것을 느꼈다. **<u>하고 싶은거 다 해봐!</u>**(자율성)
+    -   개발자는 개발에만 더 집중할 수 있도록, 인프라 적인 요소를 최대한으로 지원한다. 
 
--   개발자는 개발에만 더 집중할 수 있도록, 인프라 적인 요소를 최대한으로 지원한다. 
+    -   글로벌을 대상으로 하고 있고, 본사, 지사 다양한 국적의 사람들과 교류하기 때문에 협업/커뮤니케이션에 대한 배려를 해준다. 예를 들어 간단한 채팅도 파파고 수준의 실시간 번역을 통해서 메세지가 주고 받어 지고, 중요한 wiki문서도 영문/한국어/일본어 등으로 번역되어서 다양한 국적의 사람들에게 동일한 내용의 리소스를 전달한다. 
 
--   글로벌을 대상으로 하고 있고, 본사, 지사 다양한 국적의 사람들과 교류하기 때문에 협업/커뮤니케이션에 대한 배려를 해준다. 예를 들어 간단한 채팅도 파파고 수준의 실시간 번역을 통해서 메세지가 주고 받어 지고, 중요한 wiki문서도 영문/한국어/일본어 등으로 번역되어서 다양한 국적의 사람들에게 동일한 내용의 리소스를 전달한다. 
-
-    
+      
 
 
 
@@ -100,6 +99,37 @@ RestTemplate vs WebClient
 
 
 
+## 2/3
+
+https://github.com/umanking/dev-note/blob/master/spring/spring-security.md
+
+-   Spring security 복습 
+
+    -   인증과 인가의 차이: `인증`은 id/password로 일치하는지를 판별, `인가`는 인증된 사용자에 한해서 ROLE를 부여함 
+
+    -   SecurityContextHolder > SecurityContext  > Authentication객체 (Principal, GrantAuthority) 가 들어 있다. 
+
+    -   ```java
+        Authentication auth= SecurityContextHolder.getcontext().getAuthentication();
+        
+        User principal = (User) auth.getPrincipal()
+            
+        Collection<? extends GrantedAuthority> authorities = authentication.getAuthorities();
+        ```
+
+
+
+
+
+https://www.digitalocean.com/community/tutorials/an-introduction-to-oauth-2
+
+-   oauth role 4가지
+    -   Resource Owner
+    -   Client
+    -   Resource Server
+    -   Authorization Server 
+-   
+
 
 
 ## More study about...
@@ -112,3 +142,8 @@ RestTemplate vs WebClient
 -   http Content-Disposition Header
 -   netty
 -   java NIO package? 
+
+
+
+
+

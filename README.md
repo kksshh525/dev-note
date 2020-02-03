@@ -1,10 +1,6 @@
 # Dev note 
 
-
-
-
-
--   [Study 2020년 1월](study-202001.md)
+-   [Study 2020년](study-2020.md)
 
 
 
@@ -52,4 +48,5 @@
 
 <!--stackedit_data:
 eyJoaXN0b3J5IjpbMTI1NjYxOTU5Ml19
--->
+
+# -->
