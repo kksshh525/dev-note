@@ -124,11 +124,13 @@ https://github.com/umanking/dev-note/blob/master/spring/spring-security.md
 https://www.digitalocean.com/community/tutorials/an-introduction-to-oauth-2
 
 -   oauth role 4가지
+
     -   Resource Owner
     -   Client
     -   Resource Server
     -   Authorization Server 
--   
+
+    
 
 
 
@@ -146,4 +148,26 @@ https://www.digitalocean.com/community/tutorials/an-introduction-to-oauth-2
 
 
 
+
+
+
+2/4 
+
+https://www.youtube.com/watch?v=mPB2CZiAkKM
+
+우아한 레디스 강대명님 
+
+-   redis는 collection을 제공함 memcached 는 제공안함
+    -   이미 제공하는 라이브러리를 쓰면 좋은점? 
+        -   개발의 편리성
+        -   개발의 난이도
+
+
+
+-   메모리 파편화? 
+-   jemelloc 
+-   메모리 paging 구조? 
+-   skiptable ? 자료구조
+-   ziplist 구조
+-   spring security oauth RedisToken Store
 
