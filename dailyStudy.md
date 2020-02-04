@@ -132,26 +132,7 @@ https://www.digitalocean.com/community/tutorials/an-introduction-to-oauth-2
 
     
 
-
-
-## More study about...
-
--   http schema
--   MD5 hash
--   WebRequest vs HttpServletRequest랑뭐가 다르나?
--   RED Attatck
--   XSS Attack
--   http Content-Disposition Header
--   netty
--   java NIO package? 
-
-
-
-
-
-
-
-2/4 
+## 2/4
 
 https://www.youtube.com/watch?v=mPB2CZiAkKM
 
@@ -164,10 +145,23 @@ https://www.youtube.com/watch?v=mPB2CZiAkKM
 
 
 
--   메모리 파편화? 
+-   http schema
+-   MD5 hash
+-   WebRequest vs HttpServletRequest랑뭐가 다르나?
+-   RED Attatck
+-   XSS Attack
+-   http Content-Disposition Header
+-   netty
+-   java NIO package? 
+-   메모리 파편화
+
 -   jemelloc 
+
 -   메모리 paging 구조? 
+
 -   skiptable ? 자료구조
+
 -   ziplist 구조
+
 -   spring security oauth RedisToken Store
 
