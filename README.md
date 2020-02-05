@@ -12,7 +12,7 @@
 
 **세미나** 
 
--   [AWS EKS 교육 2020 2/4~2/5](./seminar/aws-container.md)
+-   [AWS EKS 교육 - 2020 2/4~2/5](./seminar/aws-container.md)
 
     
 
@@ -37,7 +37,7 @@
 
 
 
-## Interview Qeustion
+## 3. Interview Qeustion
 
 -   [백엔드개발자 질문 모음](./interview/interview.md)
 -   [한재엽님 - Interview Qustion For Beginner](https://github.com/JaeYeopHan/Interview_Question_for_Beginner)
