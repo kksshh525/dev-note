@@ -6,6 +6,12 @@
 
 ## 정리
 
+세미나 
+
+-   [AWS EKS 교육](./seminar/aws-container.md)
+
+    
+
 인프런 강의 정리
 
 -   [인프런 - 스프링 시큐리티(백기선)](./spring/spring-security.md)
