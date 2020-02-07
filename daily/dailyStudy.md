@@ -165,3 +165,20 @@ https://www.youtube.com/watch?v=mPB2CZiAkKM
 
 -   spring security oauth RedisToken Store
 
+
+
+
+
+2/7
+
+https://www.baeldung.com/parameterized-tests-junit-5
+
+- Junit5에서 나온 parameterized test 
+- 하나의 메서드를 다양한 파라미터를 통해서 여러번 테스트 가능함
+- @ParameterziedTest , @ValueSource (배열 형태로 넣어줌)
+  - CSV files 실 파일 테스트
+  - @EnumSource를 통한 테스트 
+  - 
+
+
+

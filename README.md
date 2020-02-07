@@ -4,7 +4,8 @@
 
 ## 1. Tech News
 
--   [일일스터디](./news/dailyStudy.md) -> [기술 뉴스](./news/TechNews.md) 변경
+-   [일일 스터디 노트](./daily/dailyStudy.md) 
+-    [기술 뉴스 정리](./daily/TechNews.md)
 
 
 
