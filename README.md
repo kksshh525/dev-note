@@ -47,7 +47,7 @@
 
 
 
-## 개발 팁
+## 4. 개발 팁
 
 -   [맥북 개발 환경 셋팅](./other/setup.md)
 -   [IntelliJ 단축키 모음](https://medium.com/@umanking/%EC%9D%B8%ED%85%94%EB%A6%ACj-%EC%82%AC%EC%9A%A9%EB%B2%95-a44543666893)
