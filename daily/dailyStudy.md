@@ -178,7 +178,21 @@ https://www.baeldung.com/parameterized-tests-junit-5
 - @ParameterziedTest , @ValueSource (배열 형태로 넣어줌)
   - CSV files 실 파일 테스트
   - @EnumSource를 통한 테스트 
-  - 
+
+
+
+2020-02-09 
+
+-   https://jojoldu.tistory.com/412 
+    -   일급 컬렉션 사용해야 한다. 
+        -   map, set, 컬렉션은 final로 막을 수 없다. 
+        -   서비스 비즈니스에 의존적이다. —> 클래스를 명시해서 분리한다. 
+            -   constructor 랑 getter 를 통해서만 접근하게 만든다. immutalbe collection wrapper가 된다.
+
+http://www.differencebetween.net/technology/difference-between-git-fetch-and-git-pull/
+
+-   git fetch vs git pull 의 차이 
+-   ![](https://images.osteele.com/2008/git-transport.png)
 
 
 
